@@ -1,15 +1,14 @@
 public class Piece{
-	private Piece a;
+
 	boolean isFire;
-	Board b;
-	int x;
-	int y;
-	String type;
-	private boolean hasCapture=false;
+	private Board b;
+	private int x;
+	private int y;
+	private String type;
+	private boolean hasCapture;
 
 	public Piece (boolean isFire, Board b, int x, int y, String type) {
 		this.isFire=isFire;
-
 		this.b=b;
 		this.x=x;
 		this.y=y;
@@ -87,37 +86,42 @@ public class Piece{
 	}
 
 
-	public void move(int x, int y){
+	public void move(int a, int y){
 
-		Board b = new Board (true);
+		
 		if (this.isBomb()){
-			if ((this.x+x)%2==0) {b.remove(x-1,y-1);
-				b.remove(x-1,y);
-				b.remove(x-1,y+1);
-				b.remove(x,y-1);
-				b.remove(x,y);
-				b.remove(x,y+1);
-				b.remove(x+1,y-1);
-				b.remove(x+1,y);
-				b.remove(x+1,y+1);
+			if (Math.abs(this.x-a)==2) {
+				b.remove(a-1,y-1);
+				b.remove(a-1,y);
+				b.remove(a-1,y+1);
+				b.remove(a,y-1);
+				b.remove(a,y);
+				b.remove(a,y+1);
+				b.remove(a+1,y-1);
+				b.remove(a+1,y);
+				b.remove(a+1,y+1);
 				hasCapture=true;
 		}
 		else{
-			this.x=x;
-			this.y=y;
+			b.remove(this.x,this.y);
+			b.place(this,a,y);
 
 		}}
 		else{
-			if ((this.x+x)%2==0){
-				b.remove((this.x+x)/2,(this.y+y)/2);
-				this.x=x;
-				this.y=y;
+			if (Math.abs(this.x-a)==2){
+			b.place(this,a,y);
+
+			b.remove((this.x+a)/2,(this.y+y)/2);
+			b.remove(this.x,this.y);
+			
 				hasCapture=true;
 
 			}
 			else{
-				this.x=x;
-				this.y=y;
+			b.place(this,a,y);
+			b.remove(this.x,this.y);
+			
+
 
 			}
 		}

@@ -32,39 +32,49 @@ public class Board{
 
     public Board(boolean shouldBeEmpty){
         pieces = new Piece[8][8];
-        for (int i = 0; i < 7; i+=2){
+        if (!shouldBeEmpty){
+        for (int i = 0; i < 8; i+=2){
                 int j = 0;
                pieces [i][j]  = new Piece(true, this, i, j, "pawn");
             }
-            for (int i = 1; i < 7; i+=2){
+            for (int i = 1; i <8 ; i+=2){
                 int j = 1;
                 pieces [i][j]  = new Piece(true, this, i, j, "shield");
             }
-            for (int i = 0; i < 7; i+=2){
+            for (int i = 0; i < 8; i+=2){
                 int j = 2;
                 pieces [i][j]  = new Piece(true, this, i, j, "bomb");
             }
-            for (int i = 1; i < 7; i+=2){
+            for (int i = 1; i < 8; i+=2){
                 int j = 5;
                  pieces [i][j] = new Piece(false, this, i, j, "bomb");
             }
-            for (int i = 0; i < 7; i+=2){
+            for (int i = 0; i < 8; i+=2){
                 int j = 6;
                  pieces [i][j]  = new Piece(false, this, i, j, "shield");
             }
-            for (int i = 1; i < 7; i+=2){
+            for (int i = 1; i < 8; i+=2){
                 int j = 7;
-                pieces [i][j]   = new Piece(false, this, i, j, "pawn");
+                pieces [i][j]   = new Piece(false, this, i, j, "pawn");}
 
 }
     }
     private  void drawBoard(int N) {
+         
+        StdDrawPlus.setXscale(0, 8);
+        StdDrawPlus.setYscale(0, 8);
         for (int i = 0; i < N; i++) {
+            
             for (int j = 0; j < N; j++) {
-                if ((i + j) % 2 == 0) StdDrawPlus.setPenColor(StdDrawPlus.GREEN);
+                    if (selected && i == selectedX && j == selectedY) {
+                    StdDrawPlus.setPenColor(StdDrawPlus.WHITE);
+                }
+                else if ((i + j) % 2 == 0) StdDrawPlus.setPenColor(StdDrawPlus.GREEN);
                 else                  StdDrawPlus.setPenColor(StdDrawPlus.RED);
                 StdDrawPlus.filledSquare(i + .5, j + .5, .5);
-                StdDrawPlus.setPenColor(StdDrawPlus.WHITE);
+                
+                
+
                 if(pieces[i][j] != null) {
                     drawPiece(i, j, pieces[i][j]);
 
@@ -103,10 +113,8 @@ public class Board{
     StdDrawPlus.picture(x + .5, y + .5, img, 1, 1);}
 
     public static void main(String[] args) {
-        Board b = new Board(true);
-        int N = 8;
-        StdDrawPlus.setXscale(0, N);
-        StdDrawPlus.setYscale(0, N);
+        Board b = new Board(false);
+
         
         while(true) {
             if (StdDrawPlus.mousePressed()) {
@@ -119,7 +127,7 @@ public class Board{
             else if(StdDrawPlus.isSpacePressed() && b.canEndTurn()) {
                 b.endTurn();
             }
-            b.drawBoard(N);
+            b.drawBoard(8);
         
 
 
@@ -130,17 +138,10 @@ public class Board{
 }
 
 
-    private boolean OutofBound(int x, int y) {
-        if (x < 0 || x >= 8 || y < 0 || y >= 8) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+
 
         public Piece pieceAt(int x, int y) {
-        if (OutofBound(x, y) || pieces[x][y] == null) {
+        if (x < 0 || x >= 8 || y < 0 || y >= 8  || pieces[x][y] == null) {
             return null;
         }
         else {
@@ -148,7 +149,7 @@ public class Board{
         }
     }
         public void place(Piece aPiece, int x, int y) {
-        if (!OutofBound(x, y)) {
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
             pieces[x][y] = aPiece;
         }
     }
@@ -156,7 +157,7 @@ public class Board{
 
     private boolean validMove(int xi, int yi, int xf, int yf) {
         Piece p = pieceAt(xi, yi);
-        if (OutofBound(xi, yi) || OutofBound(xf, yf) || pieces[xf][yf] != null || p == null) {
+        if (xi < 0 || xi >= 8 || yi < 0 || yi >= 8 || xf < 0 || xf >= 8 || yf < 0 || yf >= 8 || pieces[xf][yf] != null || p == null) {
             return false;
         }
         if (!p.isKing()) {
@@ -179,7 +180,7 @@ public class Board{
 
 }
 public boolean canSelect(int x, int y) {
-        if (OutofBound(x, y)) {
+        if (x < 0 || x >= 8 || y < 0 || y >= 8) {
             return false;
         }
         else if (pieces[x][y] != null && is_fire_turn == pieces[x][y].isFire() && (!selected || !moved)) {
@@ -211,8 +212,11 @@ public void select(int x, int y) {
     }
 
     public Piece remove(int x, int y) {
+        if (x < 0 || x >= 8 || y < 0 || y >= 8){
+            return null;
+        }
         Piece removed = pieces[x][y];
-        if (OutofBound(x, y) || pieceAt(x, y) == null) {
+        if (x < 0 || x >= 8 || y < 0 || y >= 8  || pieceAt(x, y) == null) {
             return null;
         }
         else {
