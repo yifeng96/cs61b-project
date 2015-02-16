@@ -147,6 +147,12 @@ public class Board{
             return pieces[x][y];
         }
     }
+        public void place(Piece aPiece, int x, int y) {
+        if (!OutofBound(x, y)) {
+            pieces[x][y] = aPiece;
+        }
+    }
+
 
     private boolean validMove(int xi, int yi, int xf, int yf) {
         Piece p = pieceAt(xi, yi);
