@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class Board{
     
-    public  Piece [][] pieces;
+    private  Piece [][] pieces;
     private boolean moved = false;
     private boolean selected = false;
     private Piece selection = null;
@@ -24,8 +24,7 @@ public class Board{
     /** Draws an N x N board. Adapted from:
         http://introcs.cs.princeton.edu/java/15inout/CheckerBoard.java.html
      */
-    private   boolean shouldBeEmpty;
-
+    
 
 
 

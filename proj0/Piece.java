@@ -38,16 +38,8 @@ public class Piece{
 
 	}
 
-	public boolean isKing(){
-		
-		if (this.type=="king"){
-			return true;
-
-		}
-		else {return false;
-
-		}
-
+	public boolean isKing() {
+		return isKing;
 	}
 
 	public boolean isBomb(){
