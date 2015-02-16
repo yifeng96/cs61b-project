@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class Board{
     
-    private  Piece [][] pieces;
+    public  Piece [][] pieces;
     private boolean moved = false;
     private boolean selected = false;
     private Piece selection = null;
@@ -145,12 +145,12 @@ public class Board{
             return null;
         }
         else {
-            return pieces[x][y];
+             return pieces[x][y];
         }
     }
-        public void place(Piece aPiece, int x, int y) {
+        public void place(Piece p, int x, int y) {
         if (x >= 0 && x < 8 && y >= 0 && y < 8) {
-            pieces[x][y] = aPiece;
+            pieces[x][y] = p;
         }
     }
 
@@ -160,48 +160,56 @@ public class Board{
         if (xi < 0 || xi >= 8 || yi < 0 || yi >= 8 || xf < 0 || xf >= 8 || yf < 0 || yf >= 8 || pieces[xf][yf] != null || p == null) {
             return false;
         }
-        if (!p.isKing()) {
-            if ((p.isFire() && yf < yi) || (!p.isFire() && yf > yi)) {
-                return false;
+        if (!p.isKing()){
+            if (p.isFire()&&xf-xi==1&&yf-yi==1){return true;
+
+
+
             }
-        }
-        if ((Math.abs(xf - xi) == 1) && (Math.abs(yf - yi) == 1)){
-            return true;
-        }
-        if ((Math.abs(xf - xi) == 2) && (Math.abs(yf - yi) == 2)){
+            else if(!p.isFire()&&xi-xf==1&&yi-yf==1){
+return true;
+
+            }
+else if ((Math.abs(xf - xi) == 1) && (Math.abs(yf - yi) == 1)){
+            return true;}
+}
+            if ((Math.abs(xf - xi) == 2) && (Math.abs(yf - yi) == 2)){
             Piece p1 = pieceAt((xi + xf) / 2, (yi + yf) / 2);
             if (p1 != null && p1.isFire() != p.isFire()) {
                 return true;
-            }
+
+
+}
         }
-        return false;
 
-
+  return false;
 
 }
 public boolean canSelect(int x, int y) {
         if (x < 0 || x >= 8 || y < 0 || y >= 8) {
             return false;
         }
-        else if (pieces[x][y] != null && is_fire_turn == pieces[x][y].isFire() && (!selected || !moved)) {
+        
+        if (pieces[x][y] != null && is_fire_turn == pieces[x][y].isFire() && (!selected || !moved)) {
             return true;
         }
-        else if (pieces[x][y] == null && selected) {
-            if (!moved && validMove(selectedX, selectedY, x, y)) {
-                return true;
-            }
-            else if (selection.hasCaptured() && validMove(selectedX, selectedY, x, y) && Math.abs(selectedX - x) == 2) {
-                return true;
-            }
+        if (!moved&&selected&&pieces[x][y] == null&&validMove(selectedX, selectedY, x, y)){
+            return true;
         }
-        return false;
-    }
+        if (moved&&selected&&selection.hasCaptured()&&validMove(selectedX, selectedY, x, y)&&Math.abs(selectedX - x) == 2){
+return true;
+
+}
+
+return false;}
+
 public void select(int x, int y) {
         if (pieceAt(x, y) != null) {
             selectedX = x;
             selectedY = y;
             selected = true;
             selection = pieces[x][y];
+            moved=false;
         }
         else {
             pieceAt(selectedX, selectedY).move(x, y);
