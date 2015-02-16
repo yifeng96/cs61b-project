@@ -160,18 +160,18 @@ public class Board{
             return false;
         }
         if (!p.isKing()){
-            if (p.isFire()&&xf-xi==1&&yf-yi==1){return true;
+            if (p.isFire()&&Math.abs(xf-xi)==1&&yf-yi==1){return true;
 
 
 
             }
-            else if(!p.isFire()&&xi-xf==1&&yi-yf==1){
+            else if(!p.isFire()&&Math.abs(xi-xf)==1&&yi-yf==1){
 return true;
 
-            }
+            }}
 else if ((Math.abs(xf - xi) == 1) && (Math.abs(yf - yi) == 1)){
             return true;}
-}
+
             if ((Math.abs(xf - xi) == 2) && (Math.abs(yf - yi) == 2)){
             Piece p1 = pieceAt((xi + xf) / 2, (yi + yf) / 2);
             if (p1 != null && p1.isFire() != p.isFire()) {
