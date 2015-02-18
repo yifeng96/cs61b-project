@@ -26,8 +26,21 @@ public class Triangle {
       return "The lengths of the triangles do not form a valid triangle!";
     }  
 
-    // Return triangle type
-    //TODO:  return either "Equilateral", "Isosceles", or "Scalene"
-    return null; //REPLACE THIS LINE
+    if (s1==s2 && s1==s3){
+      return "Equilateral";
+    }
+    else if (s1!=s2 && s1!=s3 && s2!=s3){
+
+      return "Scalene";
+    }
+
+    else {
+      return "Isosceles";
+
+    }
+
+
+
+
   }
 }
