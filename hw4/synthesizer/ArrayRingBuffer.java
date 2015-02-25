@@ -19,7 +19,8 @@ public double p;
   first = 0;
   last=0;
  fillCount = 0;
-this.capacity=10;
+this.capacity=capacity；
+
 
 
   }
@@ -36,9 +37,8 @@ if (!isFull()){
     fillCount=fillCount+1;
     last+=1;
     if (last==capacity
-      ) {
-      last=0;
-    }
+
+
 
   }
 
