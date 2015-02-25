@@ -52,7 +52,7 @@ if (!isFull()){
   if(isEmpty()){throw new RuntimeException("Ring buffer underflow");
 	}
     if (!isEmpty()) {
-	double p=rb[first];      
+	 p=rb[first];      
 	fillCount-=1;
       rb[first] =0;
       first+=1;
