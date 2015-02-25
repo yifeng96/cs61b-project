@@ -52,7 +52,7 @@ if (!isFull()){
   if(isEmpty()){throw new RuntimeException("Ring buffer underflow");
 	}
     if (!isEmpty()) {
-	double p=first;      
+	double p=rb[first];      
 	fillCount-=1;
       rb[first] =0;
       first+=1;
@@ -66,6 +66,8 @@ if (!isFull()){
 
   /** Return oldest item, but don't remove it. */
   public double peek() {
+    if(isEmpty()){throw new RuntimeException("Ring buffer underflow");
+  }
     return rb[first];
     // TODO: Return the first item. None of your instance variables should change.
   }
