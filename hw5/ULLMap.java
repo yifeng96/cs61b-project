@@ -45,6 +45,7 @@ public class ULLMap<K,V> implements Map61B<K,V>,Iterable<K>{
 
     @Override
     public boolean containsKey(K key) { 
+   if (key!=null){return false;}
    if (n!=0) {    
                 for (Entry x = front; x != null; x = x.next) {
                     if (key.equals (x.k)){return true;}
