@@ -33,15 +33,7 @@ public class ULLMap<K,V> implements Map61B<K,V>,Iterable<K>{
         }
 
 
-    @Override
-    public V remove(K key) { 
-    throw new UnsupportedOperationException();
-}
 
-    @Override
-    public V remove(K key, V value){ 
-    throw new UnsupportedOperationException();
-}
     @Override
     public void put(K key,V val) { 
         if (containsKey(key)){
@@ -151,12 +143,12 @@ return num;
 }
 
     @Override
-    public V remove(K key) { //FIX ME SO I COMPILE
+    public void remove(K key) { //FIX ME SO I COMPILE
     throw new UnsupportedOperationException();
 }
 
     @Override
-    public V remove(K key, V value){ //FIX ME SO I COMPILE
+    public void remove(K key, V value){ //FIX ME SO I COMPILE
     throw new UnsupportedOperationException();
 }
 
