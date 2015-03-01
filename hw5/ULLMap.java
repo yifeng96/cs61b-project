@@ -143,12 +143,12 @@ return num;
 }
 
     @Override
-    public void remove(K key) { //FIX ME SO I COMPILE
+    public V remove(K key) { //FIX ME SO I COMPILE
     throw new UnsupportedOperationException();
 }
 
     @Override
-    public void remove(K key, V value){ //FIX ME SO I COMPILE
+    public V remove(K key, K value){ //FIX ME SO I COMPILE
     throw new UnsupportedOperationException();
 }
 
