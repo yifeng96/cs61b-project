@@ -52,8 +52,7 @@ public class WordNet {
             for (int sk = 0; sk < splitword.length; sk++) {
                 if (map2.containsKey(splitword[sk])) {
                     map2.get(splitword[sk]).add(Integer.parseInt(words[0]));
-                }
-                else {
+                } else {
                     Set<Integer> newvalue = new TreeSet();
                     newvalue.add(Integer.parseInt(words[0]));
                     map2.put(splitword[sk], newvalue);
@@ -139,7 +138,7 @@ public class WordNet {
         Set<Integer> id = map2.get(word);
         Set<Integer> moreid = descendants(g, id);
         
-        Iterator<Integer> xxx = id.iterator();
+        Iterator<Integer> xxx = moreid.iterator();
         while (xxx.hasNext()) {
             s.addAll(map.get(xxx.next()));
         }
