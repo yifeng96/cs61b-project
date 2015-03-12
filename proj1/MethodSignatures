@@ -180,3 +180,28 @@ public class WordLengthProcessor implements YearlyRecordProcessor {
     public double process(YearlyRecord yearlyRecord) 
 }
  
+      while (in4.hasNextLine()){
+        intt=in4.readLine().split(",");
+        
+        for (int k =0;k<intt.length ;k++ ){
+            if (intt[k]==noun){
+                return true;
+            }
+        }}
+      return false;
+    }
+
+     intt=in6.readAll().split(",");
+            for (int k =0;k<intt.length ;k++ ){
+        String[] str = intt[k].split(" ");
+
+            
+            for (int m =0;m<str.length ;m++ ){
+                s.add(str[m]);
+             
+            }
+
+            }
+             return s;
+        }
+   
