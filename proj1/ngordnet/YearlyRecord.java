@@ -3,12 +3,12 @@ package ngordnet;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeSet;
-import java.util.TreeMap;
+
 import java.util.LinkedList;
 import java.util.Arrays;
-import java.util.Iterator;
+
 import java.util.Map;
-import java.util.Arrays;
+
 import java.util.Comparator;
 
 public class YearlyRecord {
@@ -78,18 +78,18 @@ public class YearlyRecord {
     public int rank(String word) {
         String[] arr = new String[myyr.size()];
         int i = 0;
-        for(String str : myyr.keySet()){
+        for (String str : myyr.keySet()) {
             arr[i] = str;
             i += 1;
         }
         Comparator<String> c = new MyComparator();
         Arrays.sort(arr, c);
-        return myyr.size()-Arrays.asList(arr).indexOf(word);
+        return myyr.size() - Arrays.asList(arr).indexOf(word);
 
 
     }
-    private class MyComparator implements Comparator<String>{
-        public int compare(String str1, String str2){
+    private class MyComparator implements Comparator<String> {
+        public int compare(String str1, String str2) {
             if (myyr.get(str1) > myyr.get(str2)) {
                 return 1;
             }
