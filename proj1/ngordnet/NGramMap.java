@@ -54,7 +54,8 @@ public class NGramMap {
 
     /** Returns a defensive copy of the YearlyRecord of WORD. */
     public YearlyRecord getRecord(int year) {
-        return yw.get(year);
+        YearlyRecord yRMap = new YearlyRecord((HashMap<String, Integer>)yw.get(year));
+        return yRMap;
     }
 
     /** Returns the total number of words recorded in all volumes. */
@@ -67,10 +68,13 @@ public class NGramMap {
             int endYear) {
         TimeSeries<Integer> myts = new TimeSeries();
         for (int k = startYear; k <= endYear; k++) {
-            int val = this.countInYear(word, k);
-            if (val != 0) {
-                myts.put(k, val);
+            if (yw.containsKey(k)) {
+                int val = this.countInYear(word, k);
+                if (val != 0) {
+                    myts.put(k, val);
+                }        
             }
+    
                 
         }
         return myts;
@@ -82,6 +86,7 @@ public class NGramMap {
         Iterator<Integer> xxx = yw.keySet().iterator();
         while (xxx.hasNext()) {
             int in2 = xxx.next();
+            
             int count = this.countInYear(word, in2);
             if (count != 0) {
                 myts.put(in2, count);
