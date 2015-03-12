@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 hypernyms.txt
 synsets.txt
 hyponyms.txt
@@ -6,3 +7,6 @@ words_that_start_with_q.csv
 *.zip
 hyponyms1000-subgraph.txt
 synsets1000-subgraph.txt
+=======
+*.csv
+>>>>>>> 70ca23725125e900574ba97e457e35fd96cb990a

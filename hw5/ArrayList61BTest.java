@@ -9,12 +9,12 @@ import java.util.List;
 public class ArrayList61BTest {
     @Test
     public void basicTest() {
-        List<Integer> L = new ArrayList61B<Integer>();
+        List<Integer> L = new ArrayList61B<Integer>();        
         L.add(5);
         L.add(10);
         assertTrue(L.contains(5));        
-        assertFalse(L.contains(0));
-
+        assertTrue(L.contains(10));
+        assertFalse(L.isEmpty());
     }
 
     /** Runs tests. */

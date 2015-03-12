@@ -8,18 +8,20 @@ public class ArrayRingBuffer extends AbstractBoundedQueue {
   private int last;             
   /* Array for storing the buffer data. */
   private double[] rb;
-public double p;
+private double p;
   /** Create a new ArrayRingBuffer with the given capacity. */
   public ArrayRingBuffer(int capacity) {
     // TODO: Create new array with capacity elements.
     //       first, last, and fillCount should all be set to 0. 
     //       this.capacity should be set appropriately. Note that the local variable
     //       here shadows the field we inherit from AbstractBoundedQueue.
-  rb=new double[capacity] ;
+this.capacity=capacity;  
+rb=new double[capacity] ;
   first = 0;
   last=0;
  fillCount = 0;
-this.capacity=10;
+
+
 
 
   }
@@ -52,8 +54,9 @@ if (!isFull()){
   if(isEmpty()){throw new RuntimeException("Ring buffer underflow");
 	}
     if (!isEmpty()) {
-	double p=first;      
-	fillCount-=1;
+	p=rb[first];      
+	
+fillCount-=1;
       rb[first] =0;
       first+=1;
       if (first==capacity) {
@@ -66,7 +69,9 @@ if (!isFull()){
 
   /** Return oldest item, but don't remove it. */
   public double peek() {
-    return rb[first];
+  if(isEmpty()){throw new RuntimeException("Ring buffer underflow");
+	}    
+return rb[first];
     // TODO: Return the first item. None of your instance variables should change.
   }
   
