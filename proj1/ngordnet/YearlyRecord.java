@@ -85,7 +85,7 @@ public class YearlyRecord {
             Double dou = entry.getValue().doubleValue();
             String str = entry.getKey();
             if (myNewHashMap.containsKey(dou)) {
-                dou++0.01;
+                dou+=0.01;
             }
             myNewHashMap.put(dou, str);
         }
