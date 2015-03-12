@@ -8,11 +8,13 @@ import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class YearlyRecord {
     /** Creates a new empty YearlyRecord. */
     private HashMap<String, Integer> myyr;
-    private static final double value1 = 0.001; 
+
 
     public YearlyRecord() {
         myyr = new HashMap<String, Integer>();
@@ -74,32 +76,27 @@ public class YearlyRecord {
 
     /** Returns rank of WORD. Most common word is rank 1. */
     public int rank(String word) {
-        Collection<Number> k = new TreeSet();
-        Iterator<Integer> xxxx = myyr.values().iterator();
-        while (xxxx.hasNext()) {
-            Number in3 = xxxx.next();
-            k.add(in3);
-
+        String[] arr = new String[myyr.size()];
+        int i = 0;
+        for(String str : myyr.keySet()){
+            arr[i] = str;
+            i += 1;
         }
-        Map<Double, String> myNewHashMap = new HashMap<>();
-        for (Map.Entry<String, Integer> entry : myyr.entrySet()) {
-            Double dou = entry.getValue().doubleValue();
-            String str = entry.getKey();
-            while (myNewHashMap.containsKey(dou)) {
-                dou += value1;
-            }
-            
-            myNewHashMap.put(dou, str);
-        }
-        Object[] p = k.toArray();
-        TreeMap<String, Number> map = new TreeMap();
-        Arrays.sort(p);
+        Comparator<String> c = new MyComparator();
+        Arrays.sort(arr, c);
+        return myyr.size()-Arrays.asList(arr).indexOf(word);
 
-        for (int i = 0; i < p.length; i++) {
-            map.put(myNewHashMap.get(((Number) p[i]).doubleValue()), p.length - i);
 
-        }
-        return (int) map.get(word);
     }
+    private class MyComparator implements Comparator<String>{
+        public int compare(String str1, String str2){
+            if (myyr.get(str1) > myyr.get(str2)) {
+                return 1;
+            }
 
+            
+            return -1;
+            
+        }   
+    }
 }
