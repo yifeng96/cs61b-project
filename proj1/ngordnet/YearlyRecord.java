@@ -12,6 +12,7 @@ import java.util.Map;
 public class YearlyRecord {
     /** Creates a new empty YearlyRecord. */
     private HashMap<String, Integer> myyr;
+    private static final double value=0.001; 
 
     public YearlyRecord() {
         myyr = new HashMap<String, Integer>();
@@ -84,8 +85,8 @@ public class YearlyRecord {
         for (Map.Entry<String, Integer> entry : myyr.entrySet()) {
             Double dou = entry.getValue().doubleValue();
             String str = entry.getKey();
-            if (myNewHashMap.containsKey(dou)) {
-                dou += 0.1;
+            while (myNewHashMap.containsKey(dou)) {
+                dou += value;
             }
             
             myNewHashMap.put(dou, str);
