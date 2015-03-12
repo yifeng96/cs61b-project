@@ -12,7 +12,7 @@ import java.util.Map;
 public class YearlyRecord {
     /** Creates a new empty YearlyRecord. */
     private HashMap<String, Integer> myyr;
-    private static final double value=0.001; 
+    private static final double value1 = 0.001; 
 
     public YearlyRecord() {
         myyr = new HashMap<String, Integer>();
@@ -86,7 +86,7 @@ public class YearlyRecord {
             Double dou = entry.getValue().doubleValue();
             String str = entry.getKey();
             while (myNewHashMap.containsKey(dou)) {
-                dou += value;
+                dou += value1;
             }
             
             myNewHashMap.put(dou, str);
@@ -96,7 +96,7 @@ public class YearlyRecord {
         Arrays.sort(p);
 
         for (int i = 0; i < p.length; i++) {
-            map.put(myNewHashMap.get(((Number)p[i]).doubleValue()), p.length - i);
+            map.put(myNewHashMap.get(((Number) p[i]).doubleValue()), p.length - i);
 
         }
         return (int) map.get(word);
