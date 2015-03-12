@@ -54,7 +54,13 @@ public class NGramMap {
 
     /** Returns a defensive copy of the YearlyRecord of WORD. */
     public YearlyRecord getRecord(int year) {
-        YearlyRecord yRMap = new YearlyRecord(yw.get(year));
+        HashMap<String, Integer> hMap = new HashMap<String, Integer>();
+        Iterator<Integer> xxx = yw.get(year).words.iterator();
+        while (xxx.hasNext()) {
+            String in2 = xxx.next();
+            hMap.put(in2,yw.get(year).count);
+        }
+        YearlyRecord yRMap = new YearlyRecord(hMap);
         return yRMap;
     }
 
