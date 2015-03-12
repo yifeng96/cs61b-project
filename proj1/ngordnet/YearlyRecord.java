@@ -24,9 +24,7 @@ public class YearlyRecord {
 
     /** Returns the number of times WORD appeared in this year. */
     public int count(String word) {
-        if (!myyr.containsKey(word)) {
-            return 0;
-        }
+
         return myyr.get(word);
     }
 
