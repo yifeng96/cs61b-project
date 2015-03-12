@@ -80,16 +80,22 @@ public class YearlyRecord {
             k.add(in3);
 
         }
-        Map<Integer, String> myNewHashMap = new HashMap<>();
+        Map<Double, String> myNewHashMap = new HashMap<>();
         for (Map.Entry<String, Integer> entry : myyr.entrySet()) {
-            myNewHashMap.put(entry.getValue(), entry.getKey());
+            Double dou = entry.getValue().doubleValue();
+            String str = entry.getKey();
+            if (myNewHashMap.containsKey(dou)) {
+                dou++0.01;
+            }
+            myNewHashMap.put(dou, str);
         }
         Object[] p = k.toArray();
         TreeMap<String, Number> map = new TreeMap();
         Arrays.sort(p);
 
         for (int i = 0; i < p.length; i++) {
-            map.put(myNewHashMap.get((int) p[i]), p.length - i);
+            map.put(myNewHashMap.get((Double) p[i]), p.length - i);
+
         }
         return (int) map.get(word);
     }
