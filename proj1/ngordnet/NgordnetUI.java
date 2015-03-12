@@ -1,10 +1,12 @@
-
 package ngordnet;
+
 import edu.princeton.cs.introcs.StdIn;
 import edu.princeton.cs.introcs.In;
 
-/** Provides a simple user interface for exploring WordNet and NGram data.
- *  @author [yournamehere mcjones]
+/**
+ * Provides a simple user interface for exploring WordNet and NGram data.
+ * 
+ * @author [yournamehere mcjones]
  */
 public class NgordnetUI {
     public static void main(String[] args) {
@@ -55,11 +57,13 @@ public class NgordnetUI {
                 case "hypohist":
                       plotCategoryWeights(ngm,wn,tokens,startDate,endDate);
                 case "wordlength":
-                      plotProcessedHistory(ngm,startDate,endDate,yrp)
+                      plotProcessedHistory(ngm,startDate,endDate,yrp);
+                case "zipf year":
+                      plotZipfsLaw(ngm,)
                 default:
                     System.out.println("Invalid command.");  
                     break;
             }
         }
     }
-} 
+}

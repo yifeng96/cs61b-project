@@ -1,4 +1,5 @@
 package ngordnet;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -11,20 +12,20 @@ import java.util.Map;
 
 public class YearlyRecord {
     /** Creates a new empty YearlyRecord. */
-    HashMap<String, Integer>myyr;
-    public YearlyRecord(){
-        myyr= new HashMap<String, Integer>();
+    private HashMap<String, Integer> myyr;
+
+    public YearlyRecord() {
+        myyr = new HashMap<String, Integer>();
     }
 
     /** Creates a YearlyRecord using the given data. */
-    public YearlyRecord(HashMap<String, Integer> otherCountMap){
-        myyr=otherCountMap;
+    public YearlyRecord(HashMap<String, Integer> otherCountMap) {
+        myyr = otherCountMap;
     }
-
 
     /** Returns the number of times WORD appeared in this year. */
     public int count(String word) {
-        if (!myyr.containsKey(word)){
+        if (!myyr.containsKey(word)) {
             return 0;
         }
         return myyr.get(word);
@@ -32,27 +33,27 @@ public class YearlyRecord {
 
     /** Records that WORD occurred COUNT times in this year. */
     public void put(String word, int count) {
-        myyr.put(word,count);
+        myyr.put(word, count);
     }
 
     /** Returns the number of words recorded this year. */
-    public int size(){
+    public int size() {
         return myyr.size();
     }
 
     /** Returns all words in ascending order of count. */
     public Collection<String> words() {
-        Collection<Integer> k=new TreeSet();
-        k=myyr.values();
+        Collection<Integer> k = new TreeSet();
+        k = myyr.values();
         Object[] p = k.toArray();
         Arrays.sort(p);
-        Collection<String> result= new LinkedList();
+        Collection<String> result = new LinkedList();
         Map<Integer, String> myNewHashMap = new HashMap<>();
-    for(Map.Entry<String, Integer> entry : myyr.entrySet()){
-    myNewHashMap.put(entry.getValue(), entry.getKey());
-}
-        for (int i =0;i<p.length ;i++ ) {
-            String str=myNewHashMap.get((int)p[i]) ;
+        for (Map.Entry<String, Integer> entry : myyr.entrySet()) {
+            myNewHashMap.put(entry.getValue(), entry.getKey());
+        }
+        for (int i = 0; i < p.length; i++) {
+            String str = myNewHashMap.get((int) p[i]);
             result.add(str);
         }
         return result;
@@ -60,39 +61,38 @@ public class YearlyRecord {
 
     /** Returns all counts in ascending order of count. */
     public Collection<Number> counts() {
-        Collection<Integer> k=new TreeSet();
-        k=myyr.values();
+        Collection<Integer> k = new TreeSet();
+        k = myyr.values();
         Object[] p = k.toArray();
         Arrays.sort(p);
-        Collection<Number> result= new LinkedList();
-        for (int i=0;i<p.length ;i++ ) {
-            result.add((Number)p[i]);
+        Collection<Number> result = new LinkedList();
+        for (int i = 0; i < p.length; i++) {
+            result.add((Number) p[i]);
         }
         return result;
     }
 
-
     /** Returns rank of WORD. Most common word is rank 1. */
     public int rank(String word) {
-        Collection<Number> k= new TreeSet ();
-        Iterator<Integer>xxxx=myyr.values().iterator();
-        while(xxxx.hasNext()){
-          Number in3=xxxx.next();
-          k.add(in3);
-          
+        Collection<Number> k = new TreeSet();
+        Iterator<Integer> xxxx = myyr.values().iterator();
+        while (xxxx.hasNext()) {
+            Number in3 = xxxx.next();
+            k.add(in3);
+
         }
         Map<Integer, String> myNewHashMap = new HashMap<>();
-    for(Map.Entry<String, Integer> entry : myyr.entrySet()){
-    myNewHashMap.put(entry.getValue(), entry.getKey());}
+        for (Map.Entry<String, Integer> entry : myyr.entrySet()) {
+            myNewHashMap.put(entry.getValue(), entry.getKey());
+        }
         Object[] p = k.toArray();
-        TreeMap<String,Number> map= new TreeMap();
+        TreeMap<String, Number> map = new TreeMap();
         Arrays.sort(p);
-        
-        for (int i =0;i<p.length ;i++ ) {
-            map.put(myNewHashMap.get((int)p[i]),p.length-i);
+
+        for (int i = 0; i < p.length; i++) {
+            map.put(myNewHashMap.get((int) p[i]), p.length - i);
         }
         return (int) map.get(word);
     }
 
-
-} 
+}
