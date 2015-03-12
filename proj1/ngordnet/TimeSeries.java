@@ -11,10 +11,10 @@ import java.util.NavigableSet;
 
 public class TimeSeries<T extends Number> extends TreeMap<Integer, T> {
     /** Constructs a new empty TimeSeries. */
-    private TreeMap<Integer, T> myts;
+    
 
     public TimeSeries() {
-        myts = new TreeMap<Integer, T>();
+        super();
     }
 
     /**
@@ -31,21 +31,22 @@ public class TimeSeries<T extends Number> extends TreeMap<Integer, T> {
      * of both end points.
      */
     public TimeSeries(TimeSeries<T> ts, int startYear, int endYear) {
-        myts = new TreeMap<Integer, T>();
+        super();
+
         for (int k = startYear; k <= endYear; k++) {
             T val = ts.get(k);
-            myts.put(k, val);
+            this.put(k, val);
         }
 
     }
 
     /** Creates a copy of TS. */
     public TimeSeries(TimeSeries<T> ts) {
-        myts = ts;
+        super();
+        this.putAll((TreeMap<Integer, T>) ts);
+
     }
-    private T get(int key) {
-        return myts.get(key);
-    }
+
     /**
      * Returns the quotient of this time series divided by the relevant value in
      * ts. If ts is missing a key in this time series, return an
