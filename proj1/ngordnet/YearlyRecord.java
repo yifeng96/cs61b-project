@@ -85,7 +85,7 @@ public class YearlyRecord {
             Double dou = entry.getValue().doubleValue();
             String str = entry.getKey();
             if (myNewHashMap.containsKey(dou)) {
-                dou+=0.01;
+                dou += 0.1;
             }
             myNewHashMap.put(dou, str);
         }
@@ -94,7 +94,7 @@ public class YearlyRecord {
         Arrays.sort(p);
 
         for (int i = 0; i < p.length; i++) {
-            map.put(myNewHashMap.get(p[i].doubleValue()), p.length - i);
+            map.put(myNewHashMap.get(Double.valueOf(p[i])), p.length - i);
 
         }
         return (int) map.get(word);
