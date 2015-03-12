@@ -1,8 +1,9 @@
 package ngordnet;
+import java.util.Iterator;
 
 public class WordLengthProcessor implements YearlyRecordProcessor {
     public double process(YearlyRecord yearlyRecord) {
-        Iterator<String> xxx = yearlyRecord.words.iterator();
+        Iterator<String> xxx = yearlyRecord.words().iterator();
         int up = 0;
         int down = 0;
         while (xxx.hasNext()) {

@@ -24,6 +24,8 @@ public class NgordnetUI {
         System.out.println("\nFor tips on implementing NgordnetUI, see ExampleUI.java.");
         WordNet wn=new WordNet(synsetFile,hyponymFile);
         NGramMap ngm= new NGramMap(wordFile,countFile);
+        Plotter pl= new Plotter();
+        WordLengthProcessor yr=new WordLengthProcessor();
         while (true) {
             System.out.print("> ");
             String line = StdIn.readLine();
@@ -31,35 +33,37 @@ public class NgordnetUI {
             String command = rawTokens[0];
             String[] tokens = new String[rawTokens.length - 1];
             System.arraycopy(rawTokens, 1, tokens, 0, rawTokens.length - 1);
+            int startDate=0;
+            int endDate = 0;
             switch (command) {
                 case "quit": 
                     return;
                 case "help":
-                    In in = new In("help.txt");
-                    String helpStr = in.readAll();
+                    In in2 = new In("help.txt");
+                    String helpStr = in2.readAll();
                     System.out.println(helpStr);
                     break;  
                 case "range": 
-                    int startDate = Integer.parseInt(tokens[0]); 
-                    int endDate = Integer.parseInt(tokens[1]);
+                    startDate = Integer.parseInt(tokens[0]); 
+                    endDate = Integer.parseInt(tokens[1]);
                     System.out.println("Start date: " + startDate);
                     System.out.println("End date: " + endDate);
                     break;
                 case "count": 
-                    int count= ngm.countInYear(tokens[0],tokens[1])
+                    int count= ngm.countInYear(tokens[0],Integer.parseInt(tokens[1]));
                     System.out.println(count);
                 case "hyponyms":
                     System.out.println(wn.hyponyms(tokens[0]));
                 case "history":
                       for (int i =0;i<tokens.length ;i++ ) {
-                        plotWeightHistory(ngm,tokens[i],startDate,endDate);
+                        pl.plotWeightHistory(ngm,tokens[i],startDate,endDate);
                       }
                 case "hypohist":
-                      plotCategoryWeights(ngm,wn,tokens,startDate,endDate);
+                      pl.plotCategoryWeights(ngm,wn,tokens,startDate,endDate);
                 case "wordlength":
-                      plotProcessedHistory(ngm,startDate,endDate,yrp);
+                      pl.plotProcessedHistory(ngm,startDate,endDate,yr);
                 case "zipf year":
-                      plotZipfsLaw(ngm,)
+                      pl.plotZipfsLaw(ngm,Integer.parseInt(tokens[0]));
                 default:
                     System.out.println("Invalid command.");  
                     break;
