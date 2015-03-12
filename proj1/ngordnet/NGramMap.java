@@ -68,7 +68,7 @@ public class NGramMap {
         TimeSeries<Integer> myts = new TimeSeries();
         for (int k = startYear; k <= endYear; k++) {
             int val = this.countInYear(word, k);
-            if (val!=0) {
+            if (val != 0) {
                 myts.put(k, val);
             }
                 
@@ -83,7 +83,7 @@ public class NGramMap {
         while (xxx.hasNext()) {
             int in2 = xxx.next();
             int count = this.countInYear(word, in2);
-            if (count!=0) {
+            if (count != 0) {
                 myts.put(in2, count);
             }
             
