@@ -55,7 +55,7 @@ public class TimeSeries<T extends Number> extends TreeMap<Integer, T> {
 
     public TimeSeries<Double> dividedBy(TimeSeries<? extends Number> ts) {
 
-        if (!this.keySet().containsAll(ts.keySet())) {
+        if (!ts.keySet().containsAll(this.keySet())) {
             throw new IllegalArgumentException();
         }
         TimeSeries<Double> result = new TimeSeries();
