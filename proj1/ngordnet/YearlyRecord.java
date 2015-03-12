@@ -94,7 +94,7 @@ public class YearlyRecord {
         Arrays.sort(p);
 
         for (int i = 0; i < p.length; i++) {
-            map.put(myNewHashMap.get((Double) p[i]), p.length - i);
+            map.put(myNewHashMap.get(p[i].doubleValue()), p.length - i);
 
         }
         return (int) map.get(word);
