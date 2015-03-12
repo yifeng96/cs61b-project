@@ -84,7 +84,7 @@ public class WordNet {
         DirectedDFS dfdp = new DirectedDFS(G, synsetIDs);
         TreeSet<Integer> reachable = new TreeSet<Integer>();
 
-        for (int i = 1; i < G.V(); i += 1) {
+        for (int i = 0; i < G.V(); i += 1) {
             if (dfdp.marked(i)) {
                 reachable.add(i);
             }
