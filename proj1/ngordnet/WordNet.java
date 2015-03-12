@@ -53,9 +53,11 @@ public class WordNet {
                 if (map2.containsKey(splitword[sk])) {
                     map2.get(splitword[sk]).add(Integer.parseInt(words[0]));
                 }
+                else {
                 Set<Integer> newvalue = new TreeSet();
                 newvalue.add(Integer.parseInt(words[0]));
                 map2.put(splitword[sk], newvalue);
+                }
             }
         }
 
@@ -89,7 +91,7 @@ public class WordNet {
             }
         }
         return reachable;
-    }/* Returns true if NOUN is a word in some synset. */
+    } /* Returns true if NOUN is a word in some synset. */
 
     public boolean isNoun(String noun) {
 
@@ -133,7 +135,7 @@ public class WordNet {
      * of synonyms.
      */
     public Set<String> hyponyms(String word) {
-        Set<String> s = new TreeSet();
+        Set<String> s = new TreeSet<String>();
         Set<Integer> id = map2.get(word);
         Set<Integer> moreid = descendants(g, id);
         id.addAll(moreid);
