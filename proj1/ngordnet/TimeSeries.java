@@ -43,12 +43,15 @@ public class TimeSeries<T extends Number> extends TreeMap<Integer, T> {
     public TimeSeries(TimeSeries<T> ts) {
         myts = ts;
     }
-
+    private T get(int key) {
+        return myts.get(key);
+    }
     /**
      * Returns the quotient of this time series divided by the relevant value in
      * ts. If ts is missing a key in this time series, return an
      * IllegalArgumentException.
      */
+
     public TimeSeries<Double> dividedBy(TimeSeries<? extends Number> ts) {
 
         if (!this.keySet().containsAll(ts.keySet())) {
