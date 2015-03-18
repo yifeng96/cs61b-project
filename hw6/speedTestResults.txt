@@ -1,0 +1,12 @@
+ InsertRandomSpeedTest
+number of insertion  ULLmap    BSTmap    Treemap
+100                    0.23     0.23         0.24
+500                     1.13   1.15        1.13
+1000                    2.31    2.24       2.26
+InsertInOrderSpeedTest
+number of insertion  ULLmap    BSTmap    Treemap
+5000                  0.31     0.38       0.05
+10000                 0.96     1.42       0.02
+20000                 4.69     4.64       0.04
+
+The time of Treemap is very short because the elements of Treemap is already sorted and ordered.
