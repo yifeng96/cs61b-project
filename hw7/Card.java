@@ -25,8 +25,12 @@ public class Card {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Card) {
-            // YOUR CODE HERE 
+        // First check to make sure the other object is a Nana. Otherwise
+        // return false.
+        if (o != null && o instanceof Card) {
+            Card other = (Card) o;
+            return this.suit == other.suit && this.number== other.number;
+            
         }
         return false;
     }
@@ -34,6 +38,6 @@ public class Card {
     @Override
     public int hashCode() {
         // YOUR CODE HERE (this is possible in one concise line)
-        return 0;
+        return suit*100+number;
     }
 }

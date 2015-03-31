@@ -9,6 +9,7 @@ public class FibonacciMemo {
      * @param n
      * @return The nth fibonacci number
      */
+    static HashMap<Integer, Integer> myHash = new HashMap<Integer, Integer>(100);
     public static int fibNoMemo(int n) {
         if (n <= 1) {
             return n;
@@ -23,10 +24,19 @@ public class FibonacciMemo {
      * @param n
      * @return The nth fibonacci number
      */
+    
+
     public static int fibMemo(int n) {
-        // YOUR CODE HERE
-        return 0;
+        myHash.put(0,0);
+        myHash.put(1,1);
+        if (myHash.containsKey(n)) {
+            return myHash.get (n);
+        }
+        int k = fibMemo(n-1)+fibMemo(n-2);
+        myHash.put(n,k);
+        return k;
     }
+
 
     /**
      * Answer the following question as a returned String in this method:
@@ -34,7 +44,7 @@ public class FibonacciMemo {
      * as the 47th Fibonacci number?
      */
     public static String why47() {
-        String answer = "potatoes";
+        String answer = "47th Fibonacci number is larger than an Integer";
         answer += ", " + answer + " and tapioca";
         return answer;
     }
@@ -44,7 +54,7 @@ public class FibonacciMemo {
         String m = "Fibonacci's real name was Leonardo Pisano Bigollo.";
         m += "\n" + "He was the son of a wealthy merchant.\n";
         System.out.println(m);
-        System.out.println("0: " + FibonacciMemo.fibMemo(0));
+        System.out.println("0: " + FibonacciMemo.fibMemo(1300));
         System.out.println("1: " + FibonacciMemo.fibNoMemo(1));
         System.out.println("2: " + FibonacciMemo.fibNoMemo(2));
         System.out.println("3: " + FibonacciMemo.fibNoMemo(3));

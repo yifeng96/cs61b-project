@@ -61,7 +61,14 @@ public class Piece {
 
     @Override
     public boolean equals(Object o) {
-        return false; // YOUR CODE HERE
+        // First check to make sure the other object is a Nana. Otherwise
+        // return false.
+        if (o != null && o instanceof Piece) {
+            Piece other = (Piece) o;
+            return this.x == other.x && this.y== other.y;
+            
+        }
+        return false;
     }
 
     @Override

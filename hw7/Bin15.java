@@ -36,12 +36,24 @@ public class Bin15 {
     
     @Override
     public boolean equals(Object o) {
-        return false; // YOUR CODE HERE
+        // First check to make sure the other object is a Nana. Otherwise
+        // return false.
+        if (o != null && o instanceof String) {
+            String other = (String) o;
+            return this.myBinStr == myBinStr ;
+            
+        }
+        return false;
     }
     
     @Override
     public int hashCode() {
-        return -1; // YOUR CODE HERE
+        int sum=0;
+        for (int i =0;i<15 ;i++ ) {
+            char character = myBinStr.charAt(i);
+            sum += (int) character * (i+1) * (i+1); 
+        }
+        return sum;
     }
 
     /* DO THIS LAST, AFTER IMPLEMENTING EVERYTHING
@@ -51,7 +63,7 @@ public class Bin15 {
     in the method followUpAnswer(). 
     */
     public static final int followUpAnswer() {
-        return 42; // YOUR CODE HERE. THIS MAY OR MAY NOT BE CORRECT.
+        return 32; // YOUR CODE HERE. THIS MAY OR MAY NOT BE CORRECT.
     }
     
     public static void main(String[] args) {
