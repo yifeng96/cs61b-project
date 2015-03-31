@@ -44,7 +44,7 @@ public class FibonacciMemo {
      * as the 47th Fibonacci number?
      */
     public static String why47() {
-        String answer = "47th Fibonacci number is larger than an Integer";
+        String answer = "47th Fibonacci number is larger than an Integer.keep it as an int and let it overflow to negative values";
         answer += ", " + answer + " and tapioca";
         return answer;
     }

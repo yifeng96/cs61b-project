@@ -51,7 +51,7 @@ public class Bin15 {
         int sum=0;
         for (int i =0;i<15 ;i++ ) {
             char character = myBinStr.charAt(i);
-            sum += (int) character * (i+1) * (i+1); 
+            sum += (int) character * (i+10) * (i+10); 
         }
         return sum;
     }
