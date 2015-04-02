@@ -4,18 +4,25 @@ public class Username {
 
     // Instance Variables (remember, they should be private!)
     // YOUR CODE HERE
-
+    private String name ;
     public Username() {
-        // YOUR CODE HERE
+        
     }
 
     public Username(String reqName) {
-        // YOUR CODE HERE
+        this.name=reqName;
     }
 
     @Override
     public boolean equals(Object o) {
-        // YOUR CODE HERE
+        // First check to make sure the other object is a Nana. Otherwise
+        // return false.
+        if (o != null && o instanceof String) {
+            String other = (String) o;
+            return this.name == other.name;
+            // In other words, two Nana's are equal iff their myNums
+            // are the same value.
+        }
         return false;
     }
 

@@ -50,8 +50,8 @@ public class Bin15 {
     public int hashCode() {
         int sum=0;
         for (int i =0;i<15 ;i++ ) {
-            char character = myBinStr.charAt(i);
-            sum += (int) character * (i+10) * (i+10); 
+            int character = myBinStr.charAt(i);
+            sum +=  character*Math.pow(2,i); 
         }
         return sum;
     }

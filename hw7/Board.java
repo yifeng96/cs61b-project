@@ -27,6 +27,25 @@ public class Board {
 
     @Override
     public int hashCode() {
-        return 6; // YOUR CODE HERE
+        int a=0;
+        int b=0;
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < 4; j++) {
+                a=a<<1;
+
+                if (pieces[i][j] != null) {
+                    a=a|1;
+                }
     }
+    for (int j = 4; j < 8; j++) {
+                b=b<<1;
+
+                if (pieces[i][j] != null) {
+                    b=b|1;
+                }
+    }
+}
+    int sum = a ^ b;
+    return sum;
+}
 }

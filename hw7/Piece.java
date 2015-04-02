@@ -73,7 +73,30 @@ public class Piece {
 
     @Override
     public int hashCode() {
-        return 5; // YOUR CODE HERE
+        int isf=0;  // 1
+        //6
+        int issh = 0 ;//1
+        int isbo=0;
+        int isk = 0;// 1
+        if (side){
+            isf=1;
+        }
+        isf = isf<<9;
+        int xs = x<<6;
+        int ys = y<<3;
+        if (this.isBomb()) {
+            isbo=1;
+        }
+        isbo= isbo<<2;
+        if (this.isShield()) {
+            issh=1;
+        }
+        issh= issh<<1;
+        if (this.isKing()) {
+            isk=1;
+        }
+        int sum = isf + issh + isbo + isk + xs + ys;
+        return sum;
     }
 
     public static void main(String[] args) {
