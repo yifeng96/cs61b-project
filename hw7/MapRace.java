@@ -77,7 +77,7 @@ public class MapRace {
 
     public static final String followUp() {
         // YOUR ANSWER HERE
-        String answer = "yes, because I done it ";
+        String answer = "no, it depends on the data, HashMap will be more efficient in general, so use it whenever you don't care about the order of the keys. ";
         answer += "yuh huh I did";
         return answer;
     }
