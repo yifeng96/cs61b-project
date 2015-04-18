@@ -50,7 +50,7 @@ public class GitletPublicTest {
      */
     @Before
     public void setUp() {
-        File f = new File(GITLET_DIR);
+        File f = new File(".gitlet/");
         if (f.exists()) {
             recursiveDelete(f);
         }
@@ -65,7 +65,7 @@ public class GitletPublicTest {
      * Tests that init creates a .gitlet directory. Does NOT test that init
      * creates an initial commit, which is the other functionality of init.
      */
-    @Test
+    @test
     public void testBasicInitialize() {
         gitlet("init");
         File f = new File(GITLET_DIR);
@@ -93,7 +93,7 @@ public class GitletPublicTest {
      * Tests that log prints out commit messages in the right order. Involves
      * init, add, commit, and log.
      */
-    @Test
+    
     public void testBasicLog() {
         gitlet("init");
         String commitMessage1 = "initial commit";
