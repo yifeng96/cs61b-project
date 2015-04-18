@@ -511,11 +511,11 @@ Object[] saved;
             int x = Collections.max(bragroup.get(bra));
             String lastid =  Integer.toString(x);
             File last = new File(".gitlet/commited/"+lastid+"/"+new File(name).getName());       
-                 
+          
             
         try{
         Files.copy(last.toPath(),
-        new File(new File(name).getName()).toPath(),
+        new File(name).toPath(),
         StandardCopyOption.REPLACE_EXISTING);
     }
     catch (IOException e){

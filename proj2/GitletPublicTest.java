@@ -65,7 +65,7 @@ public class GitletPublicTest {
      * Tests that init creates a .gitlet directory. Does NOT test that init
      * creates an initial commit, which is the other functionality of init.
      */
-    @test
+    
     public void testBasicInitialize() {
         gitlet("init");
         File f = new File(GITLET_DIR);
