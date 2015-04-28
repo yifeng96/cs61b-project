@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and weights.
  */
@@ -7,7 +8,16 @@ public class Autocomplete {
      * @param terms Array of terms.
      * @param weights Array of weights.
      */
+    static TST<Double> ts;
+    String [] termarray;
+    double [] weightarray;
     public Autocomplete(String[] terms, double[] weights) {
+        ts = new TST();
+        for (int i = 0;i < terms.length ; i++ ) {
+            ts.put(terms[i],weights[i]);
+        }
+
+
     }
 
     /**
@@ -16,6 +26,11 @@ public class Autocomplete {
      * @return
      */
     public double weightOf(String term) {
+        if (ts.contains(term)) {
+            return ts.get(term);
+        }
+        return 0.0;
+
     }
 
     /**
@@ -24,6 +39,13 @@ public class Autocomplete {
      * @return Best (highest weight) matching string in the dictionary.
      */
     public String topMatch(String prefix) {
+        Queue<String> queue = ts.keysWithPrefix(prefix);
+        PriorityQueue<String> pq = new PriorityQueue<String>(15,comparator);
+        while (!queue.isEmpty()){
+            String sk = queue.dequeue();
+            pq.add(sk);
+        }
+        return pq.peek();
     }
 
     /**
@@ -34,7 +56,33 @@ public class Autocomplete {
      * @return
      */
     public Iterable<String> topMatches(String prefix, int k) {
+        Queue<String> queue = ts.keysWithPrefix(prefix);
+        PriorityQueue<String> pq = new PriorityQueue<String>(15,comparator);
+        while (!queue.isEmpty()){
+            String sk = queue.dequeue();
+            pq.add(sk);
+        }
+        PriorityQueue<String> mypq = new PriorityQueue(k,comparator);
+        for (int i = 0; i < k ; i++ ) {
+            String str = pq.remove();
+            mypq.add(str);
+        }
+        return mypq;
+
     }
+    public static Comparator <String> comparator = new Comparator <String>(){
+        public int compare(String x, String y)   {
+
+    if ((Double)ts.get(y) > (Double)ts.get(x)){
+        return 1;
+    }
+    if ((Double)ts.get(y) < (Double)ts.get(x)){
+        return -1;
+    }
+    return 0;
+    }
+
+    };
 
     /**
      * Returns the highest weighted matches within k edit distance of the word.
