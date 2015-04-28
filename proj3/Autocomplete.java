@@ -12,6 +12,9 @@ public class Autocomplete {
     String [] termarray;
     double [] weightarray;
     public Autocomplete(String[] terms, double[] weights) {
+        if (terms.length!=weights.length) {
+            throw new IllegalArgumentException();
+        }
         ts = new TST();
         for (int i = 0;i < terms.length ; i++ ) {
             ts.put(terms[i],weights[i]);
@@ -27,6 +30,9 @@ public class Autocomplete {
      */
     public double weightOf(String term) {
         if (ts.contains(term)) {
+            if (ts.get(term) < 0) {
+                throw new IllegalArgumentException();
+            }
             return ts.get(term);
         }
         return 0.0;
@@ -56,6 +62,9 @@ public class Autocomplete {
      * @return
      */
     public Iterable<String> topMatches(String prefix, int k) {
+        if (k < 1) {
+            throw new IllegalArgumentException();
+        }
         Queue<String> queue = ts.keysWithPrefix(prefix);
         PriorityQueue<String> pq = new PriorityQueue<String>(15,comparator);
         while (!queue.isEmpty()){

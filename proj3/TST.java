@@ -71,6 +71,9 @@ public class TST<Value> {
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
     public void put(String key, Value val) {
+        if (contains(key)) {
+            throw new IllegalArgumentException();
+        }
         if (!contains(key)) N++;
         root = put(root, key, val, 0);
     }
