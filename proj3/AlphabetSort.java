@@ -23,6 +23,9 @@ public class AlphabetSort {
 			}
 		}
 		t = new Trie();
+		if (!input.hasNextLine()) {
+			throw new IllegalArgumentException();
+		}
 		while (input.hasNextLine()) {
 			t.insert(input.nextLine());
 		}
@@ -37,13 +40,18 @@ public class AlphabetSort {
 
 	public void sort(Node x) {
 
-		if (t.word.contains(x.output)) {
+		if (t.word.contains(x.output)&&x.hasl == false) {
 
 			System.out.println(x.output);
 
 			output = "";
 
-		} else {
+		} 
+
+		else {
+			if (t.word.contains(x.output)&&x.hasl == true) {
+				System.out.println(x.output);
+			}
 			for (String element : alphabet) {
 
 				char c = element.charAt(0);

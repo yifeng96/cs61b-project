@@ -7,7 +7,7 @@ import java.util.HashSet;
  * @author
  */
 public class Trie {
-	private static final int r = 128;
+	private static final int r = 256;
 	HashSet<String> word = new HashSet();
 	String out;
 
@@ -53,6 +53,7 @@ public class Trie {
 	}
 
 	char c = s.charAt(d);
+	x.hasl = true;
 	x.links[c] = put(x.links[c], s, d + 1);
 
 	return x;
