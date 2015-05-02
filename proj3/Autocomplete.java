@@ -1,4 +1,5 @@
 import java.util.*;
+import edu.princeton.cs.introcs.In;
 
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
@@ -13,7 +14,7 @@ public class Autocomplete {
 	 * @param weights
 	 *            Array of weights.
 	 */
-	private final int hahaha = 15;
+	private final int hahaha = 1;
 	static TST<Double> ts;
 	String[] termarray;
 	double[] weightarray;
@@ -56,42 +57,40 @@ public class Autocomplete {
 	 * @return Best (highest weight) matching string in the dictionary.
 	 */
 	public String topMatch(String prefix) {
-		Queue<String> queue = ts.keysWithPrefix(prefix);
-		PriorityQueue<String> pq = new PriorityQueue<String>(hahaha, comparator);
-		while (!queue.isEmpty()) {
-			String sk = queue.dequeue();
-			pq.add(sk);
-		}
-		return pq.peek();
-	}
-
-	/**
-	 * Returns the top k matching terms (in descending order of weight) as an
-	 * iterable. If there are less than k matches, return all the matching
-	 * terms.
-	 * 
-	 * @param prefix
-	 * @param k
-	 * @return
-	 */
-	public Iterable<String> topMatches(String prefix, int k) {
-		if (k < 1) {
-			throw new IllegalArgumentException();
-		}
-		Queue<String> queue = ts.keysWithPrefix(prefix);
-		PriorityQueue<String> pq = new PriorityQueue<String>(hahaha, comparator);
-		while (!queue.isEmpty()) {
-			String sk = queue.dequeue();
-			pq.add(sk);
-		}
-		PriorityQueue<String> mypq = new PriorityQueue(k, comparator);
-		for (int i = 0; i < k; i++) {
-			String str = pq.remove();
-			mypq.add(str);
-		}
-		return mypq;
-
-	}
+Queue<String> queue = ts.keysWithPrefix(prefix);
+PriorityQueue<String> pq = new PriorityQueue<String>(hahaha, comparator);
+while (!queue.isEmpty()) {
+String sk = queue.dequeue();
+pq.add(sk);
+}
+return pq.peek();
+}
+/**
+* Returns the top k matching terms (in descending order of weight) as an
+* iterable. If there are less than k matches, return all the matching
+* terms.
+*
+* @param prefix
+* @param k
+* @return
+*/
+public Iterable<String> topMatches(String prefix, int k) {
+if (k < 1) {
+throw new IllegalArgumentException();
+}
+Queue<String> queue = ts.keysWithPrefix(prefix);
+PriorityQueue<String> pq = new PriorityQueue<String>(hahaha, comparator);
+while (!queue.isEmpty()) {
+String sk = queue.dequeue();
+pq.add(sk);
+}
+PriorityQueue<String> mypq = new PriorityQueue(k, comparator);
+for (int i = 0; i < k; i++) {
+String str = pq.remove();
+mypq.add(str);
+}
+return mypq;
+}
 
 	public static Comparator<String> comparator = new Comparator<String>() {
 		public int compare(String x, String y) {
