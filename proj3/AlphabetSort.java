@@ -40,7 +40,7 @@ public class AlphabetSort {
 
 	public void sort(Node x) {
 
-		if (t.word.contains(x.output)&&x.hasl == false) {
+		if (t.find(x.output,true)&&x.hasl == false) {
 
 			System.out.println(x.output);
 
@@ -49,7 +49,7 @@ public class AlphabetSort {
 		} 
 
 		else {
-			if (t.word.contains(x.output)&&x.hasl == true) {
+			if (t.find(x.output,true)&&x.hasl == true) {
 				System.out.println(x.output);
 			}
 			for (String element : alphabet) {

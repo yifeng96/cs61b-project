@@ -8,22 +8,24 @@ import java.util.HashSet;
  */
 public class Trie {
 	private static final int r = 256;
-	HashSet<String> word = new HashSet();
+
 	String out;
 
 	public Node root = new Node();
 
 	public boolean find(String s, boolean isFullWord) {
 	Node x = root;
-	if (isFullWord) {
-		return word.contains(s);
-	}
+
 	for (int i = 0; i < s.length(); i++) {
 		char c = s.charAt(i);
 		if (x.links[c] == null) {
 		return false;
 		}
 		x = x.links[c];
+
+	}
+	if (isFullWord&&!x.exists) {
+		return false;
 	}
 	return true;
 
@@ -37,7 +39,7 @@ public class Trie {
 	}
 
 	private Node put(Node x, String s, int d) {
-	word.add(s);
+
 
 	if (x == null) {
 		x = new Node();
