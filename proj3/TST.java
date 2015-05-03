@@ -159,8 +159,8 @@ public class TST {
 	ArrayList<String> queue = new ArrayList<String>();
 	AComparator comparator = new AComparator();
 	BComparator comparator2 = new BComparator();
-	PriorityQueue<Node> pq = new PriorityQueue<Node>(10, comparator);
-	PriorityQueue<Node> minpq = new PriorityQueue<Node>(10, comparator2);
+	PriorityQueue<Node> pq = new PriorityQueue<Node>(1, comparator);
+	PriorityQueue<Node> minpq = new PriorityQueue<Node>(1, comparator2);
 	Node x = get(root, prefix, 0);
 	if (x == null) {
 		return queue;
@@ -180,10 +180,11 @@ public class TST {
 	}
 }
 
-	while ((minpq.isEmpty() || minpq.size() < k) && pq.size() > 0) {
+	
 
-	while ((pq.peek() == null) || (pq.peek().val == null)
-			|| ((pq.peek().val < pq.peek().max)&&pq.peek().gone == false)) {
+	while (pq.size() > 0&&(minpq.isEmpty()|| minpq.size() < k)){
+
+			 
 		Node y = pq.peek();
 		if (y.left != null) {
 			pq.add(y.left);
@@ -195,29 +196,21 @@ public class TST {
 			pq.add(y.right);
 		}
 		if (y.val != null) {
-			y.gone = true;
+			minpq.add(y);
+			
 		}
-		if (y.val == null)
-		{			
-			pq.remove(y);
-		}
-		if (y.val == y.max) {
-			pq.poll();
-			pq.add(y);
-		}
+		pq.remove(y);
+		
 
-		}
 
-		Node z = pq.poll();
-		if (minpq.size() == k) {
-		minpq.poll();
-		}
-		minpq.add(z);
+		
+
+		
 	}
+	
 	while (pq.size() > 0 && pq.peek().max >= minpq.peek().val) {
 
-		while ((pq.peek() == null) || (pq.peek().val == null)
-			|| ((pq.peek().val < pq.peek().max)&&pq.peek().gone == false)) {
+		
 		Node y = pq.peek();
 		if (y.left != null) {
 			pq.add(y.left);
@@ -229,25 +222,26 @@ public class TST {
 			pq.add(y.right);
 		}
 		if (y.val != null) {
-			y.gone = true;
+			if (minpq.size() == k) {
+			if (minpq.peek().val < y.val) {
+				minpq.poll();
+				minpq.add(y);
+			}
 		}
-		if (y.val == null)
-		{			
+			else {minpq.add(y);}
+			
+		}
+				
 			pq.remove(y);
-		}
+		
 
-		if (y.val == y.max) {
-			pq.poll();
-			pq.add(y);
-		}
-		}
 
-		Node p = pq.poll();
-		if (minpq.size() == k) {
-		minpq.poll();
-		}
-		minpq.add(p);
+		
+
 	}
+
+
+	
 	while (minpq.size() != 0) {
 		Node t = minpq.poll();
 		queue.add(t.word);

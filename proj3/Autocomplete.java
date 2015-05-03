@@ -7,10 +7,9 @@ import java.util.Comparator;
  */
 public class Autocomplete {
 
-  private final int hahaha = 4;
-  static TST ts;
-  String[] termarray;
-  double[] weightarray;
+  private final int hahaha = 5;
+  TST ts;
+
 
   public Autocomplete(String[] terms, double[] weights) {
     if (terms.length != weights.length) {
@@ -67,23 +66,9 @@ public class Autocomplete {
     if (k < 0) {
       throw new IllegalArgumentException();
     }
-    return ts.search(prefix, 10);
+    return ts.search(prefix, k);
   }
 
-  public static Comparator<String> comparator = new Comparator<String>() {
-    @Override
-    public int compare(String x, String y) {
-
-      if (ts.get(y) > ts.get(x)) {
-        return 1;
-      }
-      if (ts.get(y) < ts.get(x)) {
-        return -1;
-      }
-      return 0;
-    }
-
-  };
 
   /**
    * Returns the highest weighted matches within k edit distance of the word. If
