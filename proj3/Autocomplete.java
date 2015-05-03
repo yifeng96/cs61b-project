@@ -9,8 +9,8 @@ public class Autocomplete {
     private final int hahaha = 5;
     TST ts;
 /**
- * @return nothingd
- * @param s lol
+ * @param weights haveterms
+ * @param terms lol
  */
     public Autocomplete(String[] terms, double[] weights) {
         if (terms.length != weights.length) {
@@ -29,7 +29,7 @@ public class Autocomplete {
     /**
      * Find the weight of a given term. If it is not in the dictionary, return 0.0
      * @return nothingd
- *    @param s lol
+ *    @param term lol
      * 
      */
     public double weightOf(String term) {
@@ -47,7 +47,7 @@ public class Autocomplete {
      * Return the top match for given prefix, or null if there is no matching
      * term.
     * @return nothingd
- *    @param s lol
+ *    @param prefix lol
      *          Input prefix to match against.
      *  Best (highest weight) matching string in the dictionary.
      */
@@ -60,8 +60,8 @@ public class Autocomplete {
      * iterable. If there are less than k matches, return all the matching terms.
      * 
     * @return nothingd
- *    @param s lol
-     * 
+ *    @param prefix lol
+     * @param k lol
      */
     public Iterable<String> topMatches(String prefix, int k) {
         if (k < 0) {
@@ -75,11 +75,11 @@ public class Autocomplete {
      * the word is in the dictionary, then return an empty list.
      * 
      *  word
-    * @return nothingd
- *    @param s lol    Maximum edit distance to search
-     * @ k
+     * @return nothingd
+     * @param word lol    Maximum edit distance to search
+     * @param k haahh
      *          Number of results to return
-     * @ Iterable in descending weight order of the matches
+     * @param dist Iterable in descending weight order of the matches
      */
     public Iterable<String> spellCheck(String word, int dist, int k) {
         ArrayList<String> results = new ArrayList<String>();
@@ -92,7 +92,7 @@ public class Autocomplete {
      * autocomplete queries from standard input and prints out the top k matching
      * terms.
      * 
-     *  @param s lol 
+     *  @param args lol 
      *          takes the name of an input file and an integer k as command-line
      *          arguments
      */

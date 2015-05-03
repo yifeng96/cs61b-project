@@ -11,7 +11,7 @@ public class Trie {
  * Implements autocomplete on prefixes for a given dictionary of terms and
  * @return nothing
  *@param s lol
- *
+ *@param isFullWord lol
  */
     public boolean find(String s, boolean isFullWord) {
         Node x = root;
@@ -39,7 +39,13 @@ public class Trie {
         }
         put(root, s, 0);
     }
-
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * @param x lol
+ *@param s lol
+ *@param d lol
+ *@return lol
+ */
     private Node put(Node x, String s, int d) {
 
         if (x == null) {
@@ -63,7 +69,7 @@ public class Trie {
     }
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ * @param args aaa
  */
     public static void main(String[] args) {
         Trie t = new Trie();
