@@ -1,11 +1,4 @@
-import java.util.HashSet;
 
-/**
- * Prefix-Trie. Supports linear time find() and insert(). Should support
- * determining whether a word is a full word in the Trie or a prefix.
- * 
- * @author
- */
 public class Trie {
   private static final int r = 256;
 
