@@ -1,10 +1,16 @@
-
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * weights.
+ */
 public class Trie {
 
     String out;
 
-    private Node root = new Node();
-
+    Node root = new Node();
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * weights.
+ */
     public boolean find(String s, boolean isFullWord) {
         Node x = root;
 
@@ -22,7 +28,10 @@ public class Trie {
         return true;
 
     }
-
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * weights.
+ */
     public void insert(String s) {
         if (s == null || s.equals("")) {
             throw new IllegalArgumentException();
@@ -51,7 +60,10 @@ public class Trie {
 
         return x;
     }
-
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * weights.
+ */
     public static void main(String[] args) {
         Trie t = new Trie();
         t.insert("hello");

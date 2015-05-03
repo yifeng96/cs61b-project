@@ -1,12 +1,18 @@
 import java.util.HashMap;
 import java.util.Scanner;
-
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * weights.
+ */
 public class AlphabetSort {
     String output;
     static String[] alphabet;
     static Trie t;
     static Node a;
-
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * weights.
+ */
     public static void main(String[] args) {
         AlphabetSort as = new AlphabetSort();
         Scanner input = new Scanner(System.in);
@@ -37,7 +43,10 @@ public class AlphabetSort {
         as.sort(a);
 
     }
-
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * weights.
+ */
     public void sort(Node x) {
 
         if (t.find(x.output, true) && !x.hasl) {
