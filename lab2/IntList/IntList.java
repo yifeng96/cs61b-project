@@ -74,3 +74,4 @@ return B;
 }
 return new IntList(A.head, catenate(A.tail,B));
 }
+}
