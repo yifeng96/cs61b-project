@@ -1,17 +1,19 @@
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.LinkedList;
 
-public class TST<Value> {
+
+public class TST {
     private int N;              // size
-    private Node<Value> root;   // root of TST
+    private Node root;   // root of TST
 
-    private static class Node<Value> {
+    private static class Node {
         private char c;                        // character
-        private Node<Value> left, mid, right;  // left, middle, and right subtries
-        private Value val;  
-        private Value max = null;        
+        private Node left, mid, right;  // left, middle, and right subtries
+        private Double val = null;  
+        private Double max = null;        
         private String word;
-                   // value associated with string
+                   // Double associated with string
     }
 
     /**
@@ -21,8 +23,8 @@ public class TST<Value> {
     }
 
     /**
-     * Returns the number of key-value pairs in this symbol table.
-     * @return the number of key-value pairs in this symbol table
+     * Returns the number of key-Double pairs in this symbol table.
+     * @return the number of key-Double pairs in this symbol table
      */
     public int size() {
         return N;
@@ -40,28 +42,28 @@ public class TST<Value> {
     }
 
     /**
-     * Returns the value associated with the given key.
+     * Returns the Double associated with the given key.
      * @param key the key
-     * @return the value associated with the given key if the key is in the symbol table
+     * @return the Double associated with the given key if the key is in the symbol table
      *     and <tt>null</tt> if the key is not in the symbol table
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
-    public Value get(String key) {
+    public Double get(String key) {
         if (key == null) throw new NullPointerException();
         if (key.length() == 0) throw new IllegalArgumentException("key must have length >= 1");
-        Node<Value> x = get(root, key, 0);
+        Node x = get(root, key, 0);
         if (x == null) return null;
         return x.val;
     }
-    public Value getmax(String key) {
+    public Double getmax(String key) {
         if (key == null) throw new NullPointerException();
         if (key.length() == 0) throw new IllegalArgumentException("key must have length >= 1");
-        Node<Value> x = get(root, key, 0);
+        Node x = get(root, key, 0);
         if (x == null) return null;
         return x.max;
     }
     // return subtrie corresponding to given key
-    public Node<Value> get(Node<Value> x, String key, int d) {
+    private Node get(Node x, String key, int d) {
         if (key == null) throw new NullPointerException();
         if (key.length() == 0) throw new IllegalArgumentException("key must have length >= 1");
         if (x == null) return null;
@@ -73,14 +75,14 @@ public class TST<Value> {
     }
 
     /**
-     * Inserts the key-value pair into the symbol table, overwriting the old value
-     * with the new value if the key is already in the symbol table.
-     * If the value is <tt>null</tt>, this effectively deletes the key from the symbol table.
+     * Inserts the key-Double pair into the symbol table, overwriting the old Double
+     * with the new Double if the key is already in the symbol table.
+     * If the Double is <tt>null</tt>, this effectively deletes the key from the symbol table.
      * @param key the key
-     * @param val the value
+     * @param val the Double
      * @throws NullPointerException if <tt>key</tt> is <tt>null</tt>
      */
-    public void put(String key, Value val) {
+    public void put(String key, Double val) {
         if (contains(key)) {
             throw new IllegalArgumentException();
         }
@@ -88,21 +90,18 @@ public class TST<Value> {
         root = put(root, key, val, 0);
     }
 
-    private Node<Value> put(Node<Value> x, String key, Value val, int d) {
+    private Node put(Node x, String key, Double val, int d) {
         char c = key.charAt(d);
-        try{
+    
+        if (x == null) {
+            x = new Node();
+            x.c = c;
+        }
         if (x.max == null) {
             x.max = val;
         }
-        if ((Double)val > (Double)x.max) {
+        if (val > x.max) {
             x.max = val;
-        }}
-        catch(NullPointerException a){
-            
-        }
-        if (x == null) {
-            x = new Node<Value>();
-            x.c = c;
         }
         if      (c < x.c)               x.left  = put(x.left,  key, val, d);
         else if (c > x.c)               x.right = put(x.right, key, val, d);
@@ -113,42 +112,78 @@ public class TST<Value> {
         return x;
     }
     
-    public Queue<String> keysWithPrefix(String prefix) {
-        Queue<String> queue = new Queue<String>();
-        Node<Value> x = get(root, prefix, 0);
+    public LinkedList<String> keysWithPrefix(String prefix) {
+        LinkedList<String> queue = new LinkedList<String>();
+        Node x = get(root, prefix, 0);
         if (x == null) return queue;
-        if (x.val != null) queue.enqueue(prefix);
+        if (x.val != null) queue.add(prefix);
         collect(x.mid, new StringBuilder(prefix), queue);
+
         return queue;
     }
-    public String topMatch(String prefix) {
-        Node<Value> x = get(root, prefix, 0);
-        if (x == null) return null;
-        if (x.mid == null) {
-            return prefix;
+    
+    public LinkedList<String> search(String prefix,int k){
+        LinkedList<String> queue = new LinkedList<String>();
+        AComparator comparator = new AComparator();
+        PriorityQueue<Node> pq = new PriorityQueue<Node>(1, comparator);
+        Node x = get(root, prefix, 0);
+        if (x == null) {
+            return queue;
         }
-        x=x.mid;
-        while(x.mid != null){
-            if (x.left.max == x.max) {
-                x = x.left;
-            }
-            if (x.right.max == x.max) {
-                x = x.right;
-            }
-            if (x.mid.max == x.max) {
-                x = x.mid;
-            }
+        pq.add(x);
+        
+        if (x.val == null) {
+            pq.poll();
+            pq.add(x.mid);
         }
-        String str = x.word;
-        x = null;
-        return str;
+        else if (x.mid == null) {
+            queue.add(x.word);
+            return queue;
+        }
+        else if (x.val < x.max) {
+            pq.poll();
+            pq.add(x.mid);
+        }
+        while(queue.size() <= k){
+            while(pq.peek().val == null||pq.peek().val < pq.peek().max){
+                Node y = pq.peek();
+                if (y.left != null) {
+                    pq.add(y.left);
+                }
+                if (y.mid != null) {
+                    pq.add(y.mid);
+                }
+                if (y.right != null) {
+                    pq.add(y.right);
+                }
+                pq.remove(y);
+            }
+            Node z = pq.poll();
+            queue.add(z.word);
+        }
+        return queue;
+
     }
+    class  AComparator implements Comparator<Node> {
+        @Override
+        public int compare(Node x, Node y) {
+
+            if ( y.max >  x.max) {
+                return 1;
+            }
+            if ( y.max <  x.max) {
+                return -1;
+            }
+            return 0;
+        }
+
+    };
 
     // all keys in subtrie rooted at x with given prefix
-    public void collect(Node<Value> x, StringBuilder prefix, Queue<String> queue) {
+    public void collect(Node x, StringBuilder prefix, LinkedList<String> queue) {
         if (x == null) return;
         collect(x.left,  prefix, queue);
-        if (x.val != null) queue.enqueue(prefix.toString() + x.c);
+        if (x.val != null) queue.add(prefix.toString() + x.c);
         collect(x.mid,   prefix.append(x.c), queue);
         prefix.deleteCharAt(prefix.length() - 1);
         collect(x.right, prefix, queue);
