@@ -2,7 +2,7 @@ import list.EquationList;
 
 public class Calculator {
     // YOU MAY WISH TO ADD SOME FIELDS
-
+    EquationList storage= new EquationList("none", 0, null);
     /**
      * TASK 2: ADDING WITH BIT OPERATIONS
      * add() is a method which computes the sum of two integers x and y using 
@@ -13,7 +13,18 @@ public class Calculator {
      **/
     public int add(int x, int y) {
         // YOUR CODE HERE
-        return -1;
+        
+        
+            int carry = x & y;
+            int result = x ^ y;
+            while(carry != 0)
+            {
+                int shiftedcarry = carry << 1;
+                carry = result & shiftedcarry;
+                result ^= shiftedcarry;
+            }
+            return result;
+        
     }
 
     /**
@@ -26,7 +37,28 @@ public class Calculator {
      **/
     public int multiply(int x, int y) {
         // YOUR CODE HERE
-        return -1;
+        int carry = y;
+        int result = 0;
+        while (carry != 0)
+        {
+            int adder = x;
+                        
+            int counter = 0;
+            int comparison = add(carry, 1);
+            while ((carry ^ comparison) ==1)
+            {
+                counter= add(counter,1);
+                adder<<=1;
+                carry >>>=1;
+                comparison=add(carry, 1);
+            }
+            carry>>= 1;
+            carry<<= 1;
+            carry<<=counter;
+            result= add(result, adder);
+        }
+        return result;
+        
     }
 
     /**
@@ -39,7 +71,16 @@ public class Calculator {
      * @param result is an integer corresponding to the result of the equation
      **/
     public void saveEquation(String equation, int result) {
-        // YOUR CODE HERE
+        /*// YOUR CODE HERE
+        EquationList temporary=storage;
+        while (temporary.next!=null)
+        {
+            temporary=temporary.next;
+        }
+        temporary.next=new EquationList(equation, result, null);
+        */
+
+        storage = new EquationList( equation, result, storage);
     }
 
     /**
@@ -51,6 +92,14 @@ public class Calculator {
      **/
     public void printAllHistory() {
         // YOUR CODE HERE
+        EquationList temporary=storage;
+        while (temporary.next!=null)
+        {
+            String equation = temporary.equation;
+            int result = temporary.result;
+            System.out.println(equation+" = "+result);
+            temporary=temporary.next;
+        }
     }
 
     /**
@@ -62,6 +111,20 @@ public class Calculator {
      **/
     public void printHistory(int n) {
         // YOUR CODE HERE
+        int i=1;
+        EquationList temporary=storage;
+        while (i<=n)
+        {
+            if (temporary.next==null)
+            {
+                return; 
+            }
+            String equation = temporary.equation;
+            int result = temporary.result;
+            System.out.println(equation+" = "+result);
+            temporary=temporary.next;
+            i+=1;
+        }
     }    
 
     /**
@@ -70,6 +133,7 @@ public class Calculator {
     **/
     public void undoEquation() {
         // YOUR CODE HERE
+        storage=storage.next;
     }
 
     /**
@@ -78,6 +142,8 @@ public class Calculator {
      **/
     public void clearHistory() {
         // YOUR CODE HERE
+
+        storage=new EquationList("none", 0, null);
     }
 
     /**
@@ -88,7 +154,15 @@ public class Calculator {
      **/
     public int cumulativeSum() {
         // YOUR CODE HERE
-        return -1;
+        int totalsum = 0;
+        EquationList temporary=storage;
+        while (temporary.next!=null)
+        {
+            totalsum+=temporary.result;
+            temporary=temporary.next;
+
+        }
+        return totalsum;
     }
 
     /**
@@ -99,6 +173,14 @@ public class Calculator {
      **/
     public int cumulativeProduct() {
         // YOUR CODE HERE
-        return -1;
+        int totalmul = 1;
+        EquationList temporary=storage;
+        while (temporary.next!=null)
+        {
+            totalmul*=temporary.result;
+            temporary=temporary.next;
+
+        }
+        return totalmul;
     }
 }
