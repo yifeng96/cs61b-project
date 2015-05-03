@@ -1,6 +1,6 @@
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ * @author hahaah
  */
 public class Trie {
 
@@ -9,11 +9,12 @@ public class Trie {
     Node root = new Node();
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ * @return nothing
+ *@param s lol
+ *
  */
     public boolean find(String s, boolean isFullWord) {
         Node x = root;
-
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (x.links[c] == null) {
@@ -30,7 +31,7 @@ public class Trie {
     }
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ * @param s lol
  */
     public void insert(String s) {
         if (s == null || s.equals("")) {

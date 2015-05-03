@@ -2,15 +2,15 @@ import java.util.ArrayList;
 
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ * @author me
  */
 public class Autocomplete {
 
     private final int hahaha = 5;
     TST ts;
 /**
- * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ * @return nothingd
+ * @param s lol
  */
     public Autocomplete(String[] terms, double[] weights) {
         if (terms.length != weights.length) {
@@ -28,8 +28,8 @@ public class Autocomplete {
 
     /**
      * Find the weight of a given term. If it is not in the dictionary, return 0.0
-     * 
-     *  term
+     * @return nothingd
+ *    @param s lol
      * 
      */
     public double weightOf(String term) {
@@ -46,8 +46,8 @@ public class Autocomplete {
     /**
      * Return the top match for given prefix, or null if there is no matching
      * term.
-     * 
-     * prefix
+    * @return nothingd
+ *    @param s lol
      *          Input prefix to match against.
      *  Best (highest weight) matching string in the dictionary.
      */
@@ -59,8 +59,8 @@ public class Autocomplete {
      * Returns the top k matching terms (in descending order of weight) as an
      * iterable. If there are less than k matches, return all the matching terms.
      * 
-     *  prefix
-     *  k
+    * @return nothingd
+ *    @param s lol
      * 
      */
     public Iterable<String> topMatches(String prefix, int k) {
@@ -75,9 +75,8 @@ public class Autocomplete {
      * the word is in the dictionary, then return an empty list.
      * 
      *  word
-     *          The word to spell-check
-     *  dist
-     *          Maximum edit distance to search
+    * @return nothingd
+ *    @param s lol    Maximum edit distance to search
      * @ k
      *          Number of results to return
      * @ Iterable in descending weight order of the matches
@@ -93,7 +92,7 @@ public class Autocomplete {
      * autocomplete queries from standard input and prints out the top k matching
      * terms.
      * 
-     *  args
+     *  @param s lol 
      *          takes the name of an input file and an integer k as command-line
      *          arguments
      */

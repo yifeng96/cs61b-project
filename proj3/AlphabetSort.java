@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ *   @author me
  */
 public class AlphabetSort {
     String output;
@@ -11,7 +11,7 @@ public class AlphabetSort {
     static Node a;
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ *   * @param s lol
  */
     public static void main(String[] args) {
         AlphabetSort as = new AlphabetSort();
@@ -45,7 +45,7 @@ public class AlphabetSort {
     }
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
- * weights.
+ *@param s lol
  */
     public void sort(Node x) {
 
