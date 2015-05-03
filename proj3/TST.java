@@ -13,6 +13,9 @@ public class TST {
 	private Double val = null;
 	private Double max = null;
 	private String word;
+	private boolean gone = false;
+	private boolean has = false;
+
 	// Double associated with string
 	}
 
@@ -123,10 +126,13 @@ public class TST {
 		x.max = val;
 	}
 	if (c < x.c) {
+		x.has = true;
 		x.left = put(x.left, key, val, d);
 	} else if (c > x.c) {
+		x.has = true;
 		x.right = put(x.right, key, val, d);
 	} else if (d < key.length() - 1) {
+		x.has = true;
 		x.mid = put(x.mid, key, val, d + 1);
 	} else {
 		x.val = val;
@@ -161,6 +167,7 @@ public class TST {
 	}
 
 	pq.add(x);
+	if(prefix.length() != 0){
 	if (x.val == null) {
 		pq.poll();
 		pq.add(x.mid);
@@ -171,11 +178,12 @@ public class TST {
 		pq.poll();
 		pq.add(x.mid);
 	}
+}
 
 	while ((minpq.isEmpty() || minpq.size() < k) && pq.size() > 0) {
 
-		while ((pq.peek() == null) || (pq.peek().val == null)
-			|| (pq.peek().val < pq.peek().max)) {
+	while ((pq.peek() == null) || (pq.peek().val == null)
+			|| ((pq.peek().val < pq.peek().max)&&pq.peek().gone == false)||((pq.peek().val == pq.peek().max)&&pq.peek().gone == false&&pq.peek().has==true)) {
 		Node y = pq.peek();
 		if (y.left != null) {
 			pq.add(y.left);
@@ -186,7 +194,13 @@ public class TST {
 		if (y.right != null) {
 			pq.add(y.right);
 		}
-		pq.remove(y);
+		if (y.val != null) {
+			y.gone = true;
+		}
+		if (y.val == null)
+		{			
+			pq.remove(y);
+		}
 
 		}
 
@@ -199,7 +213,7 @@ public class TST {
 	while (pq.size() > 0 && pq.peek().max >= minpq.peek().val) {
 
 		while ((pq.peek() == null) || (pq.peek().val == null)
-			|| (pq.peek().val < pq.peek().max)) {
+			|| ((pq.peek().val < pq.peek().max)&&pq.peek().gone == false)||((pq.peek().val == pq.peek().max)&&pq.peek().gone == false&&pq.peek().has==true)) {
 		Node y = pq.peek();
 		if (y.left != null) {
 			pq.add(y.left);
@@ -210,7 +224,13 @@ public class TST {
 		if (y.right != null) {
 			pq.add(y.right);
 		}
-		pq.remove(y);
+		if (y.val != null) {
+			y.gone = true;
+		}
+		if (y.val == null)
+		{			
+			pq.remove(y);
+		}
 
 		}
 
@@ -239,7 +259,17 @@ public class TST {
 		if (y.max < x.max) {
 		return -1;
 		}
-		return 0;
+		if (y.val == null&&x.val == null) {
+			return 0;
+		}
+		if (y.val == null) {
+			return -1;
+		}
+		if (x.val == null||y.val > x.val) {
+		return 1;
+		}
+
+		return -1;
 	}
 
 	}

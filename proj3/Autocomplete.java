@@ -19,6 +19,9 @@ public class Autocomplete {
 	}
 	ts = new TST();
 	for (int i = 0; i < terms.length; i++) {
+		if (weights[i] < 0) {
+			throw new IllegalArgumentException();
+		}
 		ts.put(terms[i], weights[i]);
 	}
 
@@ -62,6 +65,9 @@ public class Autocomplete {
 	 * @return
 	 */
 	public Iterable<String> topMatches(String prefix, int k) {
+	if (k < 0) {
+		throw new IllegalArgumentException();
+	}
 	return ts.search(prefix, k);
 	}
 
