@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import edu.princeton.cs.introcs.In;
+import java.util.Comparator;
 
 /**
  * Implements autocomplete on prefixes for a given dictionary of terms and
