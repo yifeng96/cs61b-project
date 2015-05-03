@@ -7,7 +7,7 @@ import java.util.Comparator;
  */
 public class Autocomplete {
 
-  private final int hahaha = 20;
+  private final int hahaha = 4;
   static TST ts;
   String[] termarray;
   double[] weightarray;

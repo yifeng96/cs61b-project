@@ -183,7 +183,7 @@ public class TST {
 	while ((minpq.isEmpty() || minpq.size() < k) && pq.size() > 0) {
 
 	while ((pq.peek() == null) || (pq.peek().val == null)
-			|| ((pq.peek().val < pq.peek().max)&&pq.peek().gone == false)||((pq.peek().val == pq.peek().max)&&pq.peek().gone == false&&pq.peek().has==true)) {
+			|| ((pq.peek().val < pq.peek().max)&&pq.peek().gone == false)) {
 		Node y = pq.peek();
 		if (y.left != null) {
 			pq.add(y.left);
@@ -200,6 +200,10 @@ public class TST {
 		if (y.val == null)
 		{			
 			pq.remove(y);
+		}
+		if (y.val == y.max) {
+			pq.poll();
+			pq.add(y);
 		}
 
 		}
@@ -213,7 +217,7 @@ public class TST {
 	while (pq.size() > 0 && pq.peek().max >= minpq.peek().val) {
 
 		while ((pq.peek() == null) || (pq.peek().val == null)
-			|| ((pq.peek().val < pq.peek().max)&&pq.peek().gone == false)||((pq.peek().val == pq.peek().max)&&pq.peek().gone == false&&pq.peek().has==true)) {
+			|| ((pq.peek().val < pq.peek().max)&&pq.peek().gone == false)) {
 		Node y = pq.peek();
 		if (y.left != null) {
 			pq.add(y.left);
@@ -232,6 +236,10 @@ public class TST {
 			pq.remove(y);
 		}
 
+		if (y.val == y.max) {
+			pq.poll();
+			pq.add(y);
+		}
 		}
 
 		Node p = pq.poll();
