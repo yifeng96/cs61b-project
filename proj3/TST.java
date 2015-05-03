@@ -1,13 +1,13 @@
-import java.util.Comparator;
-import java.util.PriorityQueue;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class TST {
   private int N; // size
   private Node root; // root of TST
 
-  private  class Node {
+  private class Node {
     private char c; // character
     private Node left, mid, right; // left, middle, and right subtries
     private Double val = null;
@@ -59,8 +59,9 @@ public class TST {
   public Double get(String key) {
 
     Node x = get(root, key, 0);
-    if (x == null)
+    if (x == null) {
       return null;
+    }
     return x.val;
   }
 
@@ -70,17 +71,19 @@ public class TST {
     if (key.length() == 0) {
       return root;
     }
-    if (x == null)
+    if (x == null) {
       return null;
+    }
     char c = key.charAt(d);
-    if (c < x.c)
+    if (c < x.c) {
       return get(x.left, key, d);
-    else if (c > x.c)
+    } else if (c > x.c) {
       return get(x.right, key, d);
-    else if (d < key.length() - 1)
+    } else if (d < key.length() - 1) {
       return get(x.mid, key, d + 1);
-    else
+    } else {
       return x;
+    }
   }
 
   /**
@@ -100,8 +103,9 @@ public class TST {
     if (contains(key)) {
       throw new IllegalArgumentException();
     }
-    if (!contains(key))
+    if (!contains(key)) {
       N++;
+    }
     root = put(root, key, val, 0);
   }
 
@@ -118,13 +122,13 @@ public class TST {
     if (val > x.max) {
       x.max = val;
     }
-    if (c < x.c)
+    if (c < x.c) {
       x.left = put(x.left, key, val, d);
-    else if (c > x.c)
+    } else if (c > x.c) {
       x.right = put(x.right, key, val, d);
-    else if (d < key.length() - 1)
+    } else if (d < key.length() - 1) {
       x.mid = put(x.mid, key, val, d + 1);
-    else {
+    } else {
       x.val = val;
       x.word = key;
     }
@@ -134,10 +138,12 @@ public class TST {
   public ArrayList<String> keysWithPrefix(String prefix) {
     ArrayList<String> queue = new ArrayList<String>();
     Node x = get(root, prefix, 0);
-    if (x == null||get(root, prefix, 0)==null)
+    if (x == null || get(root, prefix, 0) == null) {
       return queue;
-    if (x.val != null)
+    }
+    if (x.val != null) {
       queue.add(prefix);
+    }
     collect(x.mid, new StringBuilder(prefix), queue);
 
     return queue;
@@ -153,7 +159,7 @@ public class TST {
     if (x == null) {
       return queue;
     }
-    
+
     pq.add(x);
     if (x.val == null) {
       pq.poll();
@@ -166,9 +172,9 @@ public class TST {
       pq.add(x.mid);
     }
 
-    while((minpq.isEmpty()||minpq.size() < k)&&pq.size()>0){
+    while ((minpq.isEmpty() || minpq.size() < k) && pq.size() > 0) {
 
-    while ((pq.peek() == null) || (pq.peek().val == null)
+      while ((pq.peek() == null) || (pq.peek().val == null)
           || (pq.peek().val < pq.peek().max)) {
         Node y = pq.peek();
         if (y.left != null) {
@@ -181,18 +187,18 @@ public class TST {
           pq.add(y.right);
         }
         pq.remove(y);
-        
+
       }
-      
+
       Node z = pq.poll();
-        if (minpq.size() == k) {
-            minpq.poll();
-        }
-        minpq.add(z);
-  }
-    while(pq.size()>0&&pq.peek().max >= minpq.peek().val){
+      if (minpq.size() == k) {
+        minpq.poll();
+      }
+      minpq.add(z);
+    }
+    while (pq.size() > 0 && pq.peek().max >= minpq.peek().val) {
 
-    while ((pq.peek() == null) || (pq.peek().val == null)
+      while ((pq.peek() == null) || (pq.peek().val == null)
           || (pq.peek().val < pq.peek().max)) {
         Node y = pq.peek();
         if (y.left != null) {
@@ -207,16 +213,16 @@ public class TST {
         pq.remove(y);
 
       }
-      
+
       Node p = pq.poll();
-        if (minpq.size() == k) {
-            minpq.poll();
-        }
-        minpq.add(p);
-  }
-    while(minpq.size()!=0){
-        Node t = minpq.poll();
-        queue.add(t.word);
+      if (minpq.size() == k) {
+        minpq.poll();
+      }
+      minpq.add(p);
+    }
+    while (minpq.size() != 0) {
+      Node t = minpq.poll();
+      queue.add(t.word);
     }
     Collections.reverse(queue);
     return queue;
@@ -237,6 +243,7 @@ public class TST {
     }
 
   }
+
   class BComparator implements Comparator<Node> {
     @Override
     public int compare(Node x, Node y) {
@@ -254,11 +261,13 @@ public class TST {
 
   // all keys in subtrie rooted at x with given prefix
   public void collect(Node x, StringBuilder prefix, ArrayList<String> queue) {
-    if (x == null)
+    if (x == null) {
       return;
+    }
     collect(x.left, prefix, queue);
-    if (x.val != null)
+    if (x.val != null) {
       queue.add(prefix.toString() + x.c);
+    }
     collect(x.mid, prefix.append(x.c), queue);
     prefix.deleteCharAt(prefix.length() - 1);
     collect(x.right, prefix, queue);
