@@ -174,7 +174,8 @@ public class TST {
             } else if (x.mid == null) {
                 queue.add(x.word);
                 return queue;
-            } else if (x.val < x.max) {
+            } else  {
+                minpq.add(x);
                 pq.poll();
                 pq.add(x.mid);
             }

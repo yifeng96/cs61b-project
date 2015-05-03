@@ -1,9 +1,13 @@
+/**
+ * Implements autocomplete on prefixes for a given dictionary of terms and
+ * weights.
+ */
 public class Boggle {
-	public static void main(String[] args){
-		;
+    public static void main(String[] args) {
+        System.out.println("lol");
 
 
-	}
+    }
 
 
 
