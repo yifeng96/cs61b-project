@@ -258,7 +258,16 @@ public final class Sort {
         a[index1] = a[index2];
         a[index2] = tmp;
 
-        /** YOUR CODE HERE! */
+        
+            SortSounds.clearRectangle(index2);
+            SortSounds.drawRectangle(StdDraw.RED, index2);
+            StdDraw.show(5);
+            SortSounds.play(index2);
+            SortSounds.drawRectangle(StdDraw.CYAN, index2);
+            
+
+            StdDraw.show(5);
+        
 
     }
 
