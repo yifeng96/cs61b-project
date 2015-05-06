@@ -251,24 +251,42 @@ public final class Sort {
      *  @param index1 the index of the first int to be swapped.
      *  @param index2 the index of the second int to be swapped.
      **/
+
     private static void exch(int[] a, int index1, int index2) {
         /** YOUR CODE HERE! */
-
+        /*SortSounds.drawRectangle(StdDraw.YELLOW, index1);
+        StdDraw.show(20);
+        SortSounds.clearRectangle(index1);
+        int tmp = a[index1];
+        a[index1] = a[index2];
+        SortSounds.drawRectangle(StdDraw.RED, index1);
+        StdDraw.show(5);
+        SortSounds.play(index1);
+        SortSounds.drawRectangle(StdDraw.CYAN, index1);
+        StdDraw.show(5);
+        SortSounds.clearRectangle(index2);
+        a[index2] = tmp;
+        SortSounds.drawRectangle(StdDraw.RED, index2);
+        StdDraw.show(5);
+        SortSounds.play(index2);
+        SortSounds.drawRectangle(StdDraw.CYAN, index2); */
+        /** YOUR CODE HERE! */
+        SortSounds.drawRectangle(StdDraw.CYAN, index1);
+        SortSounds.drawRectangle(StdDraw.CYAN, index2);
         int tmp = a[index1];
         a[index1] = a[index2];
         a[index2] = tmp;
-
-        
-            SortSounds.clearRectangle(index2);
-            SortSounds.drawRectangle(StdDraw.RED, index2);
-            StdDraw.show(5);
-            SortSounds.play(index2);
-            SortSounds.drawRectangle(StdDraw.CYAN, index2);
-            
-
-            StdDraw.show(5);
-        
-
+        SortSounds.clearRectangle(index1);
+        SortSounds.drawRectangle(StdDraw.RED, index1);
+        StdDraw.show(5);
+        SortSounds.play(index1);
+        SortSounds.drawRectangle(StdDraw.CYAN, index1);
+        StdDraw.show(5);
+        SortSounds.clearRectangle(index2);
+        SortSounds.drawRectangle(StdDraw.RED, index2);
+        StdDraw.show(5);
+        SortSounds.play(index2);
+        SortSounds.drawRectangle(StdDraw.CYAN, index2);
     }
 
 }
