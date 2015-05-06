@@ -1,6 +1,6 @@
 /* Radix.java */
+import java.util.*;
 
-package radix;
 
 /**
  * Sorts is a class that contains an implementation of radix sort.
@@ -78,12 +78,40 @@ public class Sorts {
      *  @return an array of type int, having the same length as "keys"
      *    and containing the same keys in sorted order.
      **/
-    public static int[] radixSort(int[] keys) {
-        for (int i = 0; i < 8; i++) {
-            keys = countingSort(keys, i);
-        }
-        return keys;
+  public static int[] radixSort(int[] input) {
+  final int RADIX = 16;
+  // declare and initialize bucket[]
+  List<Integer>[] bucket = new ArrayList[RADIX];
+  for (int i = 0; i < bucket.length; i++) {
+    bucket[i] = new ArrayList<Integer>();
+  }
+ 
+  // sort
+  boolean maxLength = false;
+  int tmp = -1, placement = 1;
+  while (!maxLength) {
+    maxLength = true;
+    // split input between lists
+    for (Integer i : input) {
+      tmp = i / placement;
+      bucket[tmp % RADIX].add(i);
+      if (maxLength && tmp > 0) {
+        maxLength = false;
+      }
     }
+    // empty lists into input array
+    int a = 0;
+    for (int b = 0; b < RADIX; b++) {
+      for (Integer i : bucket[b]) {
+        input[a++] = i;
+      }
+      bucket[b].clear();
+    }
+    // move to next digit
+    placement *= RADIX;
+  }
+  return input;
+}
 
     public static void main(String[] args) {
         int[] l = {0, 123456,7,6,322314,0,123414,3234,2,9642,1234,17};
