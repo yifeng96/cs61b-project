@@ -1,0 +1,100 @@
+1. Estimated running times (in big-theta notation):
+function1: Theta(n^2)
+function2: Theta(n)
+function3: Theta(n^3)
+
+Data:
+               n         time
+function1:   17000		  1s
+			 24000		  2s
+			 34000		  4s
+			 68000		  16s
+
+function2:   125000000     1s
+			 250000000     2s
+			 500000000	   4s
+
+
+function3:	  450		   1s
+			  900		   8s
+			  225 		  0.145s
+
+
+
+
+
+Experimentally determined running time, assuming runtime is of the form ~aN^b:
+
+function1: ~2N^2
+function2: ~1N^1
+function3: ~2N^3
+
+2. Data:
+                   n             time
+function4:		 633,910,099           nearly 0s
+
+
+
+function5 (best case):		as 2^n      nearly 0s
+
+
+
+function5 (worst case):     2000000000        1s
+							4000000000		  2s
+
+
+
+3. Data:
+                              n         time
+ArrayList:					10000        0.13s
+							40000        1.64s
+							60000		 3.64s
+
+
+HashSet:				   1000000       0.5s
+						   2000000       0.88s or 1.6s (?)
+						   2500000       1s
+						   <GAP??>
+						   2750000       4.54s
+						   3000000		 6s
+						   4000000       6.812s 
+
+
+
+
+Experimentally determined running time:
+
+ArrayList: O(n^2)
+HashSet: Some weird stuff...
+
+4. Data:
+                                       n         time
+Insertion sort with array list:
+
+
+
+
+Insertion sort with linked list:
+
+
+
+
+
+Experimentally determined running time:
+
+Insertion sort with array:        O(n^2)
+Insertion sort with linked list:  O(n^3)
+
+5. Initial guess: O(n^2)
+
+Data:             n               time
+			   1000000 			  0.388s
+			   2000000 			  1.077s
+			   3000000  		  1.978s
+			   4000000   		  3.059s
+
+
+
+Experimentally determined running time: O(n^(2^1/2))
+
+

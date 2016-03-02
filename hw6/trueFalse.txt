@@ -1,0 +1,8 @@
+1 T put ∈ Θ(log(N))
+2 T put ∈ Θ(log(N))
+3 F put ∈ Θ(log(N))
+4 T put ∈ Θ(log(N)) N> log N
+5 T N^2> log(N)
+6 T log(N) and ln(N) can represent each other
+7 F Ω means the best case so it should be 1.
+8 0(n)
